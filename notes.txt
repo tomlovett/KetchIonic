@@ -1,0 +1,28 @@
+Login
+Sign in/Sign up - "Hey there, Friend/Stranger!"
+	email/pass entry, "I'm new" toggles second pass
+Tutorial
+
+
+Team Mgmt
+Teams/Affiliations: All, [team], [team]
+Modals:
+	New Team
+		Name, Abbrev. (max four chars), [two colors; 32 basic pre-loads]
+	New/Edit Player 
+		First, Last, Nicknames, Gender, Teams, Captainhood ("C"/helm flair)
+		link to stats for established players
+
+Game
+Score Summary (/game/summary)
+Scoreboard    (/game/play/subs||inPlay)
+	subs
+	inPlay
+
+Stats
+(have written up at home)
+
+[Rating]
+
+----
+abstract DB calls in the back-end?
