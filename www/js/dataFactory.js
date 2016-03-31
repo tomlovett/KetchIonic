@@ -1,18 +1,29 @@
-angular.module('Ketch').factory('data', ['$http', function($http) {
+angular.module('Ketch').factory('data', ['$http', 'preloads', function($http, preloads) {
 
 	var server = 'http://localhost:3000'
 
 	var data = {}
 
-	data.user    = null
-	data.teams   = []
-	data.players = {}
-	data.game    = null
+	data.user     = null
+	data.teams    = []
+	data.fullTeam = {}
+	data.players  = {}
+	data.game     = null
+
+	data.initPreloads = function() {
+		data.user = preloads.playerDB[0]
+		data.teams = [100, 101]
+	}
 
 	data.player = function(playerID) {
 		if (data.players[playerID])  return data.players[playerID]
 		else {
-			'call to server'
+			if (typeof playerID == Number) {
+				var player = preload.playerDB[playerID]
+			} else {
+				'call to server'
+			}
+			// add to map
 			'does not send point or game history'
 		}
 	}
@@ -20,7 +31,12 @@ angular.module('Ketch').factory('data', ['$http', function($http) {
 	data.team = function(teamID) {
 		if (data.teams[teamID])  return data.teams[teamID]
 		else {
-			'call to server'
+			if (typeof team == Number) {
+				var team = preload.teamDB[teamID]
+			} else {
+				'call to server'
+			}
+			// add to map
 			// does not send point or game history
 		}
 	}
@@ -78,7 +94,9 @@ angular.module('Ketch').factory('data', ['$http', function($http) {
 		''
 	}
 
-	data.callStats = function(objID, dataType, statType)
+	data.callStats = function(objID, dataType, statType) {}
+
+	data.loadUser = function(playerID) {}
 
 	return data
 

@@ -1,11 +1,11 @@
 angular.module('Ketch')
-.controller('playersCtrl', ['$scope', '$ionicModal', 'data', function($scope, $ionicModal, data) {
+.controller('teamMgmt', ['$scope', '$ionicModal', 'data', function($scope, $ionicModal, data) {
 
-	$ionicModal.fromTemplateUrl('templates/editTeam.html', {scope: $scope})
-		.then(function(modal) { $scope.teamModal = modal })
+	// $ionicModal.fromTemplateUrl('templates/editTeam.html', {scope: $scope})
+	// 	.then(function(modal) { $scope.teamModal = modal })
 
-	$ionicModal.fromTemplateUrl('templates/editPlayer.html', {scope: $scope})
-		.then(function(modal) { $scope.playerModal = modal })
+	// $ionicModal.fromTemplateUrl('templates/editPlayer.html', {scope: $scope})
+	// 	.then(function(modal) { $scope.playerModal = modal })
 
 	$scope.editTeam   = {}
 	$scope.editPlayer = {}
@@ -25,7 +25,7 @@ angular.module('Ketch')
 		})
 	}
 
-	loadTeams()
+	// loadTeams()
 
 	$scope.firePlayer = function(player) {
 		if (player) { $scope.editPlayer = player }

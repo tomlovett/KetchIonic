@@ -5,7 +5,7 @@ Tutorial
 
 
 Team Mgmt
-Teams/Affiliations: All, [team], [team]
+Teams/Affiliations: [team], [team]
 Modals:
 	New Team
 		Name, Abbrev. (max four chars), [two colors; 32 basic pre-loads]

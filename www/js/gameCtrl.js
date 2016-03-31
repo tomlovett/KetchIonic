@@ -9,9 +9,9 @@ angular.module('Ketch')
 	$scope.field = []
 	$scope.bench = []
 
-	data.teams[0].roster.forEach(function(playerID) {
-		$scope.bench.push(data.player(playerID))
-	})
+	// data.teams[0].roster.forEach(function(playerID) {
+	// 	$scope.bench.push(data.player(playerID))
+	// })
 
 	$scope.doneSubs = function() {
 		$state.go('inPlay')
