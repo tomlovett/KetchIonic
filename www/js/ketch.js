@@ -27,16 +27,16 @@ angular.module('Ketch', ['ionic', 'ui.router'])
 	})
 	// Game
 	.state('game', {
-		url         : '/game',
-		controller  : 'gameCtrl'
+		url        : '/game',
+		abstract   : true,
+		controller : 'gameCtrl',
+		// templateUrl: '/templates/sansMenu.html',
+		template: '<ion-nav-view></ion-nav-view>'
+		// plain template to hide sidemenu
 	})
 	.state('game.play', {
 		url         : '/play',
-		views: {
-			'menuContent': {
-				templateUrl : '/templates/scoreboard.html',
-			}
-		}
+		templateUrl : '/templates/scoreboard.html',
 	})			
 	.state('game.play.subs', {
 		url         : '/subs',
@@ -56,6 +56,9 @@ angular.module('Ketch', ['ionic', 'ui.router'])
 		templateUrl : 'templates/teams.html',
 		controller  : 'teamMgmt'
 	})
-
+	// stats
+		// player
+			// expansions
+	// ratings
 	$urlRouterProvider.otherwise('/login')
 })
