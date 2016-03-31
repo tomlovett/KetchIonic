@@ -4,47 +4,71 @@ angular.module('Ketch').factory('data', ['$http', 'preloads', function($http, pr
 
 	var data = {}
 
-	data.user     = null
-	data.teams    = []
-	data.fullTeam = {}
-	data.players  = {}
-	data.game     = null
+	data.user      = null
+	data.userTeams = []
+	data.teams     = {}
+	data.players   = {}
+	data.game      = null
+	data.point     = {}
 
 	data.initPreloads = function() {
 		data.user = preloads.playerDB[0]
-		data.teams = [100, 101]
+		data.userTeams = [100, 101]
+		console.log('preloads complete')
 	}
 
 	data.player = function(playerID) {
 		if (data.players[playerID])  return data.players[playerID]
 		else {
-			if (typeof playerID == Number) {
-				var player = preload.playerDB[playerID]
+			if (typeof playerID == "number") { // preloaded players
+				var player = preloads.playerDB[playerID]
 			} else {
 				'call to server'
 			}
-			// add to map
-			'does not send point or game history'
+			data.players[player._id] = player
+			return player
 		}
 	}
 
 	data.team = function(teamID) {
 		if (data.teams[teamID])  return data.teams[teamID]
 		else {
-			if (typeof team == Number) {
-				var team = preload.teamDB[teamID]
+			if (typeof teamID == "number") { // preloaded teams
+				var team = preloads.teamDB[teamID]
 			} else {
 				'call to server'
 			}
-			// add to map
-			// does not send point or game history
+			data.teams[team._id] = team
+			return team
 		}
 	}
 
 	data.hotTeam = function(team) {
-		var index = data.teams.indexOf(team)
-		data.teams.unshift(data.teams.splice(index, 1)[0])
+		var index = data.userTeams.indexOf(team)
+		data.userTeams.unshift(data.userTeams.splice(index, 1)[0])
 	}
+
+// Game \\
+	data.initGame = function(team) {
+		// create game  in DB
+		// set to data.game
+	}
+
+	data.recordScore = function(result, line) {
+		if (result) { data.game.score[0] += 1 }
+		else		{ data.game.score[1] += 1 }
+		data.point.line = line
+		// pass game/point to database
+		data.point = {}
+		return 'game.score'
+	}
+
+	data.stat = function(player, stat) {
+		data.point.stats[stat] = player
+		// other recording?
+	}
+
+// not touching any of the shit below this
 
 // Player Management \\
 	data.updatePlayer = function(player) {
@@ -55,21 +79,8 @@ angular.module('Ketch').factory('data', ['$http', 'preloads', function($http, pr
 		'save team to database'
 	}
 
-// Game \\
-	data.initGame = function() {
-		data.teams[0]
-		'create Game in DB, pass to data'
-	}
-
-	data.passPoint = function(point) {
-		'push point to game in DB'
-	}
-
-	data.closeGame = function() {
-		'close out game'
-	}
-
 // Stats \\
+// hold off; pass full player for the time being, optimize later
 	data.playerPoints = function(playerID) {
 		'return only point history'
 	}

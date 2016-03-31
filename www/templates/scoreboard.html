@@ -1,11 +1,26 @@
 <ion-view>
 	<ion-content>
-<h1> 15   -     13 </h1>
-<h2> US        THEM</h2>
-<br>
-<!-- 15 - 13 -->
-<!-- US   THEM -->
+
+	<div class="row" style="text-align: center">
+    <div class="col col-40">
+      <h1 class="scoreboard">{{score[0] || 0}}</h1>
+      <h3>Burning Macaroons</h3>
+    </div>
+    <div class="col">
+      <h1 class="scoreboard">-</h1>
+      <!-- <h3>vs.</h3> -->
+    </div>
+    <div class="col col-40">
+      <h1 class="scoreboard">{{score[1] || 0}}</h1>
+      <h3>CANNED MEAT</h3>
+    </div>
+  </div>
+
+  <span ng-click="preloads()">init pre-loads</span>
+  <span ng-click="loadRoster()">load roster</span>
+
 	<ui-view></ui-view>
 <!-- subs/inPlay -->
+
 	</ion-content>
 </ion-view>

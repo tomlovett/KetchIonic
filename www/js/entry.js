@@ -25,20 +25,24 @@ angular.module('Ketch')
 	}
 
 	var loadUser = function(player, teams) {
-		data.user = player
-		data.teams = teams
-		$state.go('team')
+		data.user      = player
+		data.userTeams = teams
+		$state.go('game.play')
 	}
 
 	$scope.login = function() {
 		if (verifyInput())  { return }
+		console.log('$scope.loginData.username: ', $scope.loginData.username)
 		if ($scope.loginData.username == 'tom') {
 			data.initPreloads()
+			// then go to game
 		} else {
 			'post to server'
+			'handle errors or ->'
 			data.loadUser('res.player')
+			// then state.go()
 		}
-		$state.go('team')
+		$state.go('game.play.subs')
 	}
 
 	$scope.beginTutorial = function() {}

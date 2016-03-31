@@ -1,16 +1,33 @@
 <div>
-<!-- three cols: -->
-<h5>Mench      Womench	             Field</h5>
-<p> Dude       Chick                DudeChick</p>
-<p> Dude       Chick                DudeChick</p>
-<p> Dude       Chick                DudeChick</p>
-<p> Dude       Chick                DudeChick</p>
-<p> Dude       Chick                DudeChick</p>
-<p> Dude       Chick                </p>
-<p> Dude                       </p>
-<p> Dude                       </p>
 
-<!-- bench.m, bench.w, SPACE, field -->
-<!-- clear field -->
-<!-- done subs -->
+  <div class="row">
+    <div class="col col-33 col-offset-33">
+      <h3 ng-click="doneSubs()">Done Subs</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-25">
+      <h5>Men</h5>
+    </div>
+    <div class="col col-25">
+      <h5>Women</h5>
+    </div>
+    <div class="col col-25 col-offset-20" style="text-align: right">
+      <h5>Field</h5>
+    </div>
+  </div>
+	<div class="row">
+		<div class="col col-25">
+      <p ng-repeat="guy in bench | filter: {gender: 'm'} | orderBy: 'handle'" ng-click="move(guy, bench, field)" class="m player">{{guy.handle}}</p>
+		</div>
+    <div class="col col-25">
+      <p ng-repeat="girl in bench | filter: {gender: 'f'} | orderBy: 'handle'" ng-click="move(girl, bench, field)" class="f player">{{girl.handle}}</p>
+    </div>
+    <div class="col col-25 col-offset-20">
+      <p ng-repeat="player in field | orderBy: ['gender', 'handle']" ng-click="move(player, field, bench)" class="player {{player.gender}}" >{{player.handle}}</p>
+      <p ng-click="clearLine()">Clear Line</p>
+    </div>
+	</div>
+
 </div>

@@ -53,9 +53,11 @@ angular.module('Ketch', ['ionic', 'ui.router'])
 	// Team management
 	.state('team' , {
 		url         : '/team',
-		templateUrl : 'templates/teams.html',
+		templateUrl : 'templates/menu.html',
 		controller  : 'teamMgmt'
 	})
+	// add more team sub-states
+		// url: ..., views: { 'mainContent' : {templateUrl: ... } }
 	// stats
 		// player
 			// expansions
