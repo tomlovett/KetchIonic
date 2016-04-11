@@ -1,0 +1,8 @@
+To Do:
+complete basic game functions like recording score
+placeholder functions to manipulate client-side data
+
+
+
+April 4  - researching authorization, authorization frameworks
+April 11 - initiated server factory; hooked up pre-loaded game functionality

@@ -12,39 +12,34 @@ angular.module('Ketch')
 
 	$scope.data = data // works, but don't necessarily want to do it this way
 
-	$scope.loadRoster = function() {
-		var team = data.team(data.userTeams[0])
+	$scope.fullPreloads = function() {
+		data.initPreloads()
+		var team = data.team(data.userTeams[0]) // loads roster
 		team.roster.forEach(function(playerID) {
 			$scope.bench.push(data.player(playerID))
 		})
-	}
-
-	$scope.preloads = function() {
-		data.initPreloads()
+		data.initGame()
 	}
 
 	var refreshGame = function() {
 		$scope.game = data.pullGame()
 	}
 
-	$scope.initGame = function() {}
-
 	$scope.doneSubs = function() {
+		data.line($scope.field)
 		$state.go('game.play.inPlay')
-		data.setLine($scope.field) // necessary? don't think so
 	}
 
 	$scope.recordScore = function(result) {
-		// data.passLine
-		$scope.score = data.recordScore(result, $scope.field) // also pass line
+		data.recordScore(result)
 		$state.go('game.play.subs')
 	}
 
-	$scope.stat = function(clicked) {
+	$scope.recordStat = function(clicked) {
 		if (typeof clicked === 'string') { // stats pass string values
 			if ($scope.stat)   { $scope.stat = null    }
 			else               { $scope.stat = clicked }
-		} else {	// players pass player objects
+		} else {						   // players pass player objects
 			if ($scope.player) { $scope.player = null }
 			else 			   { $scope.player = clicked }
 		}

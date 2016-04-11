@@ -1,6 +1,4 @@
-angular.module('Ketch').factory('data', ['$http', 'preloads', function($http, preloads) {
-
-	var server = 'http://localhost:3000'
+angular.module('Ketch').factory('data', ['server', 'preloads', function(server, preloads) {
 
 	var data = {}
 
@@ -9,7 +7,7 @@ angular.module('Ketch').factory('data', ['$http', 'preloads', function($http, pr
 	data.teams     = {}
 	data.players   = {}
 	data.game      = null
-	data.point     = {}
+	data.point     = { stats: {} }
 
 	data.initPreloads = function() {
 		data.user = preloads.playerDB[0]
@@ -23,7 +21,7 @@ angular.module('Ketch').factory('data', ['$http', 'preloads', function($http, pr
 			if (typeof playerID == "number") { // preloaded players
 				var player = preloads.playerDB[playerID]
 			} else {
-				'call to server'
+				var player = server.player(playerID)
 			}
 			data.players[player._id] = player
 			return player
@@ -36,7 +34,7 @@ angular.module('Ketch').factory('data', ['$http', 'preloads', function($http, pr
 			if (typeof teamID == "number") { // preloaded teams
 				var team = preloads.teamDB[teamID]
 			} else {
-				'call to server'
+				var team = server.team(teamID)
 			}
 			data.teams[team._id] = team
 			return team
@@ -49,23 +47,29 @@ angular.module('Ketch').factory('data', ['$http', 'preloads', function($http, pr
 	}
 
 // Game \\
-	data.initGame = function(team) {
-		// create game  in DB
-		// set to data.game
+	data.initGame = function() {
+		data.game = {
+			score  : [0, 0],
+			points : []
+		}
+		// init with hotTeam
 	}
 
-	data.recordScore = function(result, line) {
+	data.recordScore = function(result) {
 		if (result) { data.game.score[0] += 1 }
 		else		{ data.game.score[1] += 1 }
-		data.point.line = line
-		// pass game/point to database
+			// keeping the above line so feedback is instantenous?
+		data.game.score = server.score(result, data.point)
 		data.point = {}
-		return 'game.score'
 	}
 
 	data.stat = function(player, stat) {
 		data.point.stats[stat] = player
 		// other recording?
+	}
+
+	data.line = function(line) {
+		data.point.line = line
 	}
 
 // not touching any of the shit below this

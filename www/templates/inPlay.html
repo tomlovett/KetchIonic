@@ -19,16 +19,16 @@
 	</div>
 	<div class="row">
 		<div class="col col-50">
-			<p>Throwaway</p>
-			<p>Drop</p>
-			<p>D</p>
-			<p>Gold Star</p>
+			<p ng-click="recordStat('throwaway')">Throwaway</p>
+			<p ng-click="recordStat('drop')">Drop</p>
+			<p ng-click="recordStat('D')">D</p>
+			<p ng-click="recordStat('goldStar')">Gold Star</p>
 		</div>
 
     <div class="col col-25 col-offset-20">
       <p 
         ng-repeat="player in field | orderBy: ['gender', 'handle']"
-        ng-click="stat(player)"
+        ng-click="recordStat(player)"
         class="player {{player.gender}}">
         {{player.handle}}
       </p>

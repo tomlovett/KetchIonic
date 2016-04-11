@@ -26,3 +26,18 @@ Stats
 
 ----
 abstract DB calls in the back-end?
+
+server game model = {
+	teamA : id
+	teamB : id
+	points: []
+	score : [A, B]
+}
+
+server point model = {
+	lineA : []
+	lineB : []
+	result: A/B ?
+	score : []
+	stats : {}
+}
