@@ -1,8 +1,9 @@
 To Do:
-complete basic game functions like recording score
-placeholder functions to manipulate client-side data
-
-
+refactor $state into controllerAs syntax
+refactor html snippets into controllerAs
+refactor $scope into vm
 
 April 4  - researching authorization, authorization frameworks
-April 11 - initiated server factory; hooked up pre-loaded game functionality
+April 11 - initiated server factory; hooked up pre-loaded game functionality; downloaded Mean Machine, got myself learned
+April 12 - hooked up a lot of the back-end through MEAN Machine
+Apri

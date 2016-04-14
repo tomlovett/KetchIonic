@@ -1,5 +1,5 @@
 angular.module('Ketch')
-.controller('teamMgmt', ['$scope', '$ionicModal', 'data', function($scope, $ionicModal, data) {
+.controller('teamMgmt', ['$ionicModal', 'models', function($ionicModal, models) {
 
 	// $ionicModal.fromTemplateUrl('templates/editTeam.html', {scope: $scope})
 	// 	.then(function(modal) { $scope.teamModal = modal })
@@ -7,22 +7,20 @@ angular.module('Ketch')
 	// $ionicModal.fromTemplateUrl('templates/editPlayer.html', {scope: $scope})
 	// 	.then(function(modal) { $scope.playerModal = modal })
 
-	$scope.editTeam   = {}
-	$scope.editPlayer = {}
+	$scope.editTeam   = null
+	$scope.editPlayer = null
 
-	$scope.allPlayers = []
-
-	var loadRosters = function(teamObj) {
+	var loadRoster = function(teamObj) {
 		teamObj.roster.forEach(function(playerID) {
-			$scope.allPlayers.push(data.player(playerID))
+			models.player(playerID)
 		})
 	}
 
 	var loadTeams = function() {
-		data.teams.forEach(function(teamID) {
-			data.team(teamID)
-				.then(function(teamObj) { loadRosters(teamObj) })
+		models.userTeams.forEach(function(teamID) {
+			models.team(teamID)
 		})
+		// doesn't make sense; if in teams will already have fully loaded object
 	}
 
 	// loadTeams()
@@ -33,7 +31,7 @@ angular.module('Ketch')
 	}
 
 	$scope.submitPlayer = function() {
-		data.updatePlayer($scope.editPlayer)
+		models.updatePlayer($scope.editPlayer)
 		$scope.playerModal.hide()
 		$scope.editPlayer = {}
 	}
@@ -44,7 +42,7 @@ angular.module('Ketch')
 	}
 
 	$scope.submitTeam = function() {
-		data.updateTeam($scope.editTeam)
+		models.updateTeam($scope.editTeam)
 		$scope.teamModal.hide()
 		$scope.editTeam = {}
 	}

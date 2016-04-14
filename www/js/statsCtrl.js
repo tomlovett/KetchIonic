@@ -1,4 +1,4 @@
 angular.module('Ketch')
-.controller('statsCtrl', ['$scope', 'd', function($scope, d) {
+.controller('statsCtrl', function(models) {
 
-}])
+})

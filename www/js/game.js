@@ -1,7 +1,9 @@
 angular.module('Ketch')
-.controller('gameCtrl', ['$scope', '$state', 'data', function($scope, $state, data) {
+.controller('gameCtrl', function(models, $scope, $state) {
 
 // auto-init game when built up enough
+	var game = this
+
 	console.log('gameCtrl')
 
 	$scope.player = null
@@ -10,28 +12,28 @@ angular.module('Ketch')
 	$scope.field = []
 	$scope.bench = []
 
-	$scope.data = data // works, but don't necessarily want to do it this way
+	$scope.models = models // works, but don't necessarily want to do it this way
 
 	$scope.fullPreloads = function() {
-		data.initPreloads()
-		var team = data.team(data.userTeams[0]) // loads roster
+		models.initPreloads()
+		var team = models.team(models.userTeams[0]) // loads roster
 		team.roster.forEach(function(playerID) {
-			$scope.bench.push(data.player(playerID))
+			$scope.bench.push(models.player(playerID))
 		})
-		data.initGame()
+		models.initGame()
 	}
 
 	var refreshGame = function() {
-		$scope.game = data.pullGame()
+		$scope.game = models.pullGame()
 	}
 
 	$scope.doneSubs = function() {
-		data.line($scope.field)
+		models.line($scope.field)
 		$state.go('game.play.inPlay')
 	}
 
 	$scope.recordScore = function(result) {
-		data.recordScore(result)
+		models.recordScore(result)
 		$state.go('game.play.subs')
 	}
 
@@ -44,7 +46,7 @@ angular.module('Ketch')
 			else 			   { $scope.player = clicked }
 		}
 		if ($scope.player && $scope.stat) {
-			data.stat($scope.player, $scope.stat)
+			models.stat($scope.player, $scope.stat)
 			$scope.player = null
 			$scope.stat   = null			
 		}
@@ -62,8 +64,6 @@ angular.module('Ketch')
 	}
 
 	// $scope.closeGame = function() {
-	// 	data.closeGame()
-	// 	'go somewhere? do something?'
 	// }
 
 	// $scope.toScoreSummary = function() {
@@ -74,4 +74,4 @@ angular.module('Ketch')
 	// 	$state.go('game')
 	// }
 
-}])
+})

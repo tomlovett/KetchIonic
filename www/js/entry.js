@@ -1,5 +1,5 @@
 angular.module('Ketch')
-.controller('entry', ['$scope', '$state', 'data', function($scope, $state, data) {
+.controller('entry', function(models, server, auth, $scope, $state, $http) {
 
 	$scope.signingUp = false
 	$scope.loginData = {}
@@ -7,8 +7,8 @@ angular.module('Ketch')
 	var verifyInput = function() {
 		$scope.errMsg = null
 		if (!($scope.loginData.username) || !$scope.loginData.password) {
-			$scope.errMsg = 'Data not filled out, retry please.'
-			// [verify email input]
+			$scope.errMsg = 'Login not filled out, retry please.'
+			// [verify email input] back-end?
 		}
 		if ($scope.signingUp) {
 			if ($scope.loginData.password !== $scope.loginData.password2) {
@@ -20,31 +20,35 @@ angular.module('Ketch')
 		return $scope.errMsg
 	}
 
-	var handleError = function(err) {
+	var serverError = function(err) {
 		'route error -> bad login, email taken, etc.'
-	}
-
-	var loadUser = function(player, teams) {
-		data.user      = player
-		data.userTeams = teams
-		$state.go('game.play')
 	}
 
 	$scope.login = function() {
 		if (verifyInput())  { return }
-		console.log('$scope.loginData.username: ', $scope.loginData.username)
 		if ($scope.loginData.username == 'tom') {
-			data.initPreloads()
+			models.initPreloads()
 			// then go to game
 		} else {
-			'post to server'
+			var res = auth.login($scope.loginData.username, $scope.loginData.password)
+			// asychronous
+				.success(function(res) {
+					$http.get('http://localhost:3000/api/player/56f174fc4a4efba0011d91ef')
+						.success(function(response) {
+							console.log('get -> response: ', response)
+						})
+
+				})
+				.error(function(err) {
+
+				})
 			'handle errors or ->'
-			data.loadUser('res.player')
+			// models.loadUser('res.player')
 			// then state.go()
 		}
-		$state.go('game.play.subs')
+		// $state.go('game.play.subs')
 	}
 
 	$scope.beginTutorial = function() {}
 
-}])
+})

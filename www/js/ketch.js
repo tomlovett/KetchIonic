@@ -1,4 +1,7 @@
-angular.module('Ketch', ['ionic', 'ui.router'])
+angular.module('Ketch', [
+	'ionic', 
+	'ui.router'
+])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -16,6 +19,10 @@ angular.module('Ketch', ['ionic', 'ui.router'])
   });
 })
 
+.config(function($httpProvider) {
+  $httpProvider.interceptors.push('authInterceptor')
+})
+
 .config(function($stateProvider, $urlRouterProvider) {
 
 	$stateProvider	
@@ -29,7 +36,7 @@ angular.module('Ketch', ['ionic', 'ui.router'])
 	.state('game', {
 		url        : '/game',
 		abstract   : true,
-		controller : 'gameCtrl',
+		controller : 'gameCtrl', // as game,
 		// templateUrl: '/templates/sansMenu.html',
 		template: '<ion-nav-view></ion-nav-view>'
 		// plain template to hide sidemenu
@@ -54,7 +61,7 @@ angular.module('Ketch', ['ionic', 'ui.router'])
 	.state('team' , {
 		url         : '/team',
 		templateUrl : 'templates/menu.html',
-		controller  : 'teamMgmt'
+		controller  : 'teamMgmt' // as team
 	})
 	// add more team sub-states
 		// url: ..., views: { 'mainContent' : {templateUrl: ... } }

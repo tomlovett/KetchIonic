@@ -34,6 +34,8 @@ server game model = {
 	score : [A, B]
 }
 
+zippered game/point models?
+
 server point model = {
 	lineA : []
 	lineB : []
