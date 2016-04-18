@@ -1,18 +1,26 @@
 angular.module('Ketch').factory('auth', function(authToken, $http) {
 
-var server = 'http://localhost:3000'
+var addr = 'http://localhost:3000'
 
 var auth = {}
 
-auth.login = function(username, password) {
-	return $http.post(server + '/auth/login', {
-		username: username,
-		password: password
-	})
-		.success(function(res) {
-			authToken.set(res.token)
-			return res
-		})
+// catchToken() ? -> returns false or token
+
+var catchToken = function(res) {
+	if (res.token) {
+		authToken.set(res.token)
+		return res.token
+	} else {
+		return res.data.message // syntax
+	}
+}
+
+auth.login = function(user) {
+	return $http.post(addr + '/auth/login', user)
+}
+
+auth.signup = function(user) {
+	return $http.post(addr + '/auth/signup', user)
 }
 
 auth.logout = function() {
@@ -20,24 +28,21 @@ auth.logout = function() {
 }
 
 auth.tutorial = function() {
-	$http.get('/tutorial')
-		.success(function(res) {
-			authToken.set(res.token)
-			return res
-		})
+	return $http.get(addr + '/auth/tutorial')
 }
 
-auth.isLoggedIn = function() {
-	if (authToken.get()) 	return true
-	else					return false
-	// simplify to return auth.getToken()?
-}
+// auth.isLoggedIn = function() {
+// 	if (authToken.get()) 	return true
+// 	else					return false
+// 	// simplify to return auth.getToken()?
+// }
 
-auth.getUser = function() {
-	var token = authToken.get()
-	if (token) 			return token.user
-	else				return false
-} // insecure? passing user this way?
+// auth.getUser = function() {
+// 	var token = authToken.get()
+// 	if (token) 			return token.user
+// 	else				return false
+// } // insecure? passing user this way?
+// // don't need to; back-end will handle
 
 return auth
 

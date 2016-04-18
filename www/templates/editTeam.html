@@ -1,19 +1,21 @@
 <ion-modal-view>
     <ion-content>
-        <div class="list">
-            <label class="item item-input">
-                <span class="input-label">Team Name</span>
-                <input type="text" ng-model="editTeam.name">
-            </label>
+        <form ng-submit="mgmt.submitTeam()">
+            <div class="list">
                 <label class="item item-input">
-                <span class="input-label">Four-Letter Abbreviation<br>i.e.: "Stack to the Future" -> "SttF"</span>
-                <input type="text" ng-model="editTeam.abbr">
-            </label>
-            <!-- main color -->
-            <!-- secondary -->
-            <label class="item">
-                <button class="button button-block button-positive" type="submit">Done</button>
-            </label>
-        </div>
+                    <span class="input-label">Team Name*</span>
+                    <input type="text" ng-model="mgmt.team.name">
+                </label>
+                    <label class="item item-input">
+                    <span class="input-label">Abbreviation (6 chars. max)<br>i.e.: "Stack to the Future" -> "Stack" or "SttF"</span>
+                    <input type="text" ng-model="mgmt.team.short">
+                </label>
+                <!-- main color -->
+                <!-- secondary -->
+                <label class="item">
+                    <button class="button button-block button-positive" type="submit">Done</button>
+                </label>
+            </div>
+        </form>
     </ion-content>
 </ion-modal-view>

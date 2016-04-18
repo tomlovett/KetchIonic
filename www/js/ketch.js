@@ -30,7 +30,7 @@ angular.module('Ketch', [
 	.state('login', {
 		url         : '/login',
 		templateUrl : '/templates/login.html',
-		controller  : 'entry'
+		controller  : 'mainCtrl as main'
 	})
 	// Game
 	.state('game', {
@@ -58,12 +58,18 @@ angular.module('Ketch', [
 	// 		templateUrl : '/templates/game/scoreSummary.html',
 	// 	})
 	// Team management
-	.state('team' , {
+	.state('team', {
 		url         : '/team',
-		templateUrl : 'templates/menu.html',
-		controller  : 'teamMgmt' // as team
+		abstract    : true,
+		templateUrl : '/templates/menu.html',
+		controller  : 'teamMgmt as mgmt'
 	})
-	// add more team sub-states
+	.state('team.manage', {
+		url         : '/manage',
+		views: {
+			'mainContent': {templateUrl : '/templates/teams.html'}
+		}
+	})	// add more team sub-states
 		// url: ..., views: { 'mainContent' : {templateUrl: ... } }
 	// stats
 		// player

@@ -1,42 +1,55 @@
 angular.module('Ketch').factory('server', ['$http', function($http) {
+// cut out dependency later
 
 	var addr = 'http://localhost:3000'
 
 	var srv = {}
 
-	srv.player = function(id) {
-		return $http.get(addr + '/api/player/' + id)
-		// server returns player object
+	srv.me = function() {
+		return $http.get(addr + '/api/player')
 	}
 
-	srv.createPlayer = function(data) {
-		// post to '/api/player'; returns player object
-		// add id to teams
+	srv.myTeams = function() {
+		return $http.get(addr + '/api/team/playerTeams/')
 	}
 
-	srv.playerTeams = function(id) {
-		// return id's of all teams user is on
-		return $http.get(addr + '/api/playerTeams/' + id)
+	// Player management
+	srv.player = function(player) {
+		return $http.get(addr + '/api/player/' + player._id)
 	}
 
-
-	srv.team = function(id) {
-		return $http.get(addr + '/api/team/' + id)
-		// server returns team in JSON
-	}
-
-	// Game
-	srv.score = function(point) {
-		return $http.put(addr + '/api/score', { point: point })
-		// server returns score
+	srv.createPlayer = function(player) {
+		return $http.post(addr + '/api/player', player)
 	}
 
 	srv.updatePlayer = function(player) {
-		return $http.put(addr + '/api/player/update', player)
+		return $http.put(addr + '/api/player/' + player._id, player)
+	}
+
+	// Team management
+	srv.team = function(team) {
+		return $http.get(addr + '/api/team/' + team._id)
+	}
+
+	srv.createTeam = function(team) {
+		return $http.post(addr + '/api/team', team)
 	}
 
 	srv.updateTeam = function(team) {
-		return $http.put(addr + '/api/team/update', team)
+		return $http.put(addr + '/api/team/' + team._id)
+	}
+
+	// Game
+	srv.game = function(game) {
+		return $http.get(addr + '/api/game/' + game._id)
+	}
+
+	srv.newGame = function(game) {
+		return $http.post(addr + '/api/game', game)
+	}
+
+	srv.updateGame = function(game) {
+		return $http.put(addr + '/api/game/' + game._id, game)
 	}
 
 	return srv
