@@ -40,6 +40,7 @@ angular.module('Ketch', [
 		// templateUrl: '/templates/sansMenu.html',
 		template: '<ion-nav-view></ion-nav-view>'
 		// plain template to hide sidemenu
+		// combining it into one? taking out one level?
 	})
 	.state('game.play', {
 		url         : '/play',
