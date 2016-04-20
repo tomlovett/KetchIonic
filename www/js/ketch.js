@@ -44,15 +44,15 @@ angular.module('Ketch', [
 	})
 	.state('game.play', {
 		url         : '/play',
-		templateUrl : '/templates/scoreboard.html',
+		templateUrl : '/templates/game/scoreboard.html',
 	})			
 	.state('game.play.subs', {
 		url         : '/subs',
-		templateUrl : '/templates/subs.html',
+		templateUrl : '/templates/game/subs.html',
 	})
 	.state('game.play.inPlay', {
 		url         : '/inPlay',
-		templateUrl : '/templates/inPlay.html',
+		templateUrl : '/templates/game/inPlay.html',
 	})	
 	// 	.state('game.scoreSummary', {
 	// 		url         : '/scoreSummary',
@@ -62,16 +62,18 @@ angular.module('Ketch', [
 	.state('team', {
 		url         : '/team',
 		abstract    : true,
-		templateUrl : '/templates/menu.html',
+		// templateUrl : '/templates/menu.html',
+		template: '<ion-nav-view></ion-nav-view>',
 		controller  : 'teamMgmt as mgmt'
 	})
-	.state('team.manage', {
+	.state('team.yourTeams', {
 		url         : '/manage',
-		views: {
-			'mainContent': {templateUrl : '/templates/teams.html'}
-		}
-	})	// add more team sub-states
+		templateUrl : '/templates/team/yourTeams.html'
+	})
+
+
 		// url: ..., views: { 'mainContent' : {templateUrl: ... } }
+	
 	// stats
 		// player
 			// expansions

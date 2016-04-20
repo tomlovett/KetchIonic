@@ -1,8 +1,6 @@
-angular.module('Ketch').factory('models', function(server, preloads) {
+angular.module('Ketch').factory('models', function(server) {
 
 	var m = {}
-
-	m.user      = null // playerObj
 	
 	m.teams     = {}
 	m.players   = {}

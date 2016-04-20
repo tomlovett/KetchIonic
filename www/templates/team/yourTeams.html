@@ -1,0 +1,10 @@
+<ion-view>
+	<ion-content>
+	<h2>Your Teams</h2>
+	<ul class="list">
+		<li class="item" ng-repeat="team in mgmt.teams" ng-click="focusTeam(team)">
+			{{team.name}}
+		</li>
+	</ul>
+	</ion-content>
+</ion-view>
