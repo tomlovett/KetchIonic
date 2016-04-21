@@ -1,4 +1,4 @@
-angular.module('Ketch').factory('server', ['$http', function($http) {
+angular.module('Ketch').factory('server', function($http) {
 // cut out dependency later
 
 	var addr = 'http://localhost:3000'
@@ -10,12 +10,12 @@ angular.module('Ketch').factory('server', ['$http', function($http) {
 	}
 
 	srv.myTeams = function() {
-		return $http.get(addr + '/api/team/playerTeams/')
+		return $http.get(addr + '/api/team/playerTeams')
 	}
 
 	// Player management
-	srv.player = function(player) {
-		return $http.get(addr + '/api/player/' + player._id)
+	srv.player = function(playerID) {
+		return $http.get(addr + '/api/player/' + playerID)
 	}
 
 	srv.createPlayer = function(player) {
@@ -27,8 +27,8 @@ angular.module('Ketch').factory('server', ['$http', function($http) {
 	}
 
 	// Team management
-	srv.team = function(team) {
-		return $http.get(addr + '/api/team/' + team._id)
+	srv.team = function(teamID) {
+		return $http.get(addr + '/api/team/' + teamID)
 	}
 
 	srv.createTeam = function(team) {
@@ -40,8 +40,8 @@ angular.module('Ketch').factory('server', ['$http', function($http) {
 	}
 
 	// Game
-	srv.game = function(game) {
-		return $http.get(addr + '/api/game/' + game._id)
+	srv.game = function(gameID) {
+		return $http.get(addr + '/api/game/' + gameID)
 	}
 
 	srv.newGame = function(game) {
@@ -54,4 +54,4 @@ angular.module('Ketch').factory('server', ['$http', function($http) {
 
 	return srv
 
-}])
+})

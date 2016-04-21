@@ -67,12 +67,23 @@ angular.module('Ketch', [
 		controller  : 'teamMgmt as mgmt'
 	})
 	.state('team.yourTeams', {
-		url         : '/manage',
+		url         : '/yourTeams',
 		templateUrl : '/templates/team/yourTeams.html'
 	})
+	.state('team.oneTeam', {
+		url         : '/oneTeam',
+		templateUrl : '/templates/team/oneTeam.html'
+	})
+	.state('team.editTeam', {
+		url         : '/editTeam',
+		templateUrl : '/templates/team/editTeam.html'
+	})
+	.state('team.editPlayer', {
+		url         : '/editPlayer',
+		templateUrl : '/templates/team/editPlayer.html'
+	})
 
-
-		// url: ..., views: { 'mainContent' : {templateUrl: ... } }
+	// url: ..., views: { 'mainContent' : {templateUrl: ... } }
 	
 	// stats
 		// player

@@ -1,50 +1,53 @@
 angular.module('Ketch')
-.controller('teamMgmt', function(models) {
+.controller('teamMgmt', function(models, $state) {
 
 	var mgmt = this
 	console.log('teamMgmt')
+
+	mgmt.models = models
 
 	mgmt.team   = null
 	mgmt.roster = []
 	mgmt.player = null
 
+
 	var initController = function() {
-		// console.log('Loading you...')
-		if (!models.user)			models.me()
-		// console.log('Loading your teams...')
-		if (!models.teams.length)	models.myTeams()
+		models.myTeams()
 	}
 
 	initController()
 
-	mgmt.focusTeam = function(team) {
-		mgmt.team   = team
+	mgmt.focusTeam = function(teamObj) {
+		console.log('focusTeam -> teamObj: ', teamObj)
+		mgmt.team   = teamObj
 		mgmt.roster = []
-		team.roster.forEach(function(playerID) {
+		teamObj.roster.forEach(function(playerID) {
+			console.log('focusTeam -> forEach -> playerID: ', playerID)
 			mgmt.roster.push(models.player(playerID))
 		})
-		// go to oneTeam
+		$state.go('team.oneTeam')
 	}
 
 	mgmt.manageTeam = function(team) {
 		if (!team) 		mgmt.team = {}
-		// go to editTeam
+		$state.go('team.editTeam')
 	}
 
 	mgmt.managePlayer = function(player) {
 		mgmt.player = player || {}
-		// go to editPlayer
+		$state.go('team.editPlayer')
 	}
 
-	mgmt.submitPlayer = function() {
+	mgmt.submitPlayer = function(done) {
 		console.log('submitPlayer fired')
+		console.log('done: ', done)
 		if (mgmt.player._id) { // new players will not have an _id property
 			models.updatePlayer(mgmt.player)
 		} else {
 			models.createPlayer(mgmt.player)
 		}
 		mgmt.player = {}
-		// go back
+		if (done)		$state.go('team.oneTeam')
 	}
 
 	mgmt.submitTeam = function() {
@@ -53,7 +56,7 @@ angular.module('Ketch')
 		} else {
 			models.createTeam(mgmt.team)
 		}
-		// go to team
+		$state.go('team.yourTeams')
 	}
 
 })

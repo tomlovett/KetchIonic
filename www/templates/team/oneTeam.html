@@ -8,14 +8,16 @@
 			<div class="col">Stats</div>
 			<div class="col button button-balanced">+Game</div>
 		</div>
+		<!-- <p>mgmt.team.roster: {{mgmt.team.roster}}</p> -->
+		<!-- <p>mgmt.models.players: {{mgmt.models.players}}</p> -->
 		<div class="row">
 			<div class="col col-40">
-				<p ng-repeat="player in mgmt.roster | orderBy: ['handle']" ng-click="focusPlayer(player)" class="player {{player.gender}}">
-			        {{player.handle}}
+				<p ng-repeat="playerID in mgmt.team.roster" ng-click="mgmt.managePlayer(player)" class="player">
+			        {{mgmt.models.players[playerID].first + ' ' + mgmt.models.players[playerID].last }}
 				</p>
 			</div>
 		</div>
-
+		<p>mgmt.roster: {{mgmt.roster}}</p>
 		<button ng-click="mgmt.managePlayer({})">Create player</button>
 		<!-- horizontal bar of teams; or dropdown box -->
 		<!-- ng-repeat roster for clicking -->

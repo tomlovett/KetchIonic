@@ -4,21 +4,27 @@
     <!-- <form ng-submit="mgmt.submitPlayer()"> -->
       <div class="list">
         <label class="item item-input">
-          <span class="input-label">First Name</span>
-          <input type="text" ng-model="mgmt.player.first">
+          <span class="input-label">First Name*</span>
+          <input type="text" autofocus="true" ng-model="mgmt.player.first">
         </label>
         <label class="item item-input">
-          <span class="input-label">Last Name</span>
+          <span class="input-label">Last Name*</span>
           <input type="text" ng-model="mgmt.player.last">
         </label>
         <label class="item item-input">
           <span class="input-label">Handle</span>
           <input type="text" ng-model="mgmt.player.handles[0]">
         </label>
+        <label class="item item-input">
+          <span class="input-label">Gender</span>
+          <input type="radio" name="gender" value="m">
+          <input type="radio" name="gender" value="f">
+        </label>        
         <!-- gender -->
-        <!-- teams/captainhood -->
+        <!-- add to these teams: -->
         <label class="item">
-          <button class="button button-block button-positive" type="submit" ng-click="mgmt.submitPlayer()">Done</button>
+          <button class="button button-block button-positive" type="submit" ng-click="mgmt.submitPlayer(true)">Done</button>
+          <button class="button button-block button-positive" type="submit" ng-click="mgmt.submitPlayer(false)">And Another One</button>
         </label>
       </div>
     </form>

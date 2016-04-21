@@ -5,47 +5,47 @@ angular.module('Ketch').factory('models', function(server) {
 	m.teams     = {}
 	m.players   = {}
 
-	m.hotTeam   = null
 	m.game      = null
 	m.point     = { stats: {} }
 
-	m.me = function() {
-		server.me()
-			.success(function(res){
-				m.user = res.player
-			})
-	}
-
 	m.myTeams = function() {
 		server.myTeams()
-			.success(function(res) {
-				if (!res.teams) 	return
-				res.teams.forEach(function(team) {
+			.success(function(res) { // returns object of team objects
+				res.forEach(function(team) {
 					m.teams[team._id] = team
 				})
+				return m.teams
 			})
 	}
 
 	m.player = function(playerID) {
+		console.log('models.player -> playerID: ', playerID)
 		if (m.players[playerID])  return m.players[playerID]
 		server.player(playerID)
 			.success(function(res) {
-				if (res.success) {
-					m.players[player._id] = res.player
-					return m.players[playerID]
-				}
+				m.players[res._id] = res
+				return m.players[playerID]
 			})		
 	}
 
-	m.team = function(teamID) { // unnecessary?
+	m.team = function(teamID) {
 		if (m.teams[teamID])  return m.teams[teamID]
 		server.team(teamID)
 			.success(function(res) {
 				if (res.success) {
-					m.teams[team._id] = res.team
+					m.teams[res._id] = res
 					return m.teams[teamID]
 				}
 			})
+	}
+
+	m.roster = function(teamID) {
+		if (!m.teams[teamID]) {
+			server.team(teamID)
+				.success(function(res) {
+					m.teams[team._id] = res.team
+				})
+		}
 	}
 
 // Game \\
@@ -73,7 +73,6 @@ angular.module('Ketch').factory('models', function(server) {
 
 	m.stat = function(player, stat) {
 		m.point.stats[stat] = player
-		// server.stat(player, stat)
 	}
 
 	m.line = function(line) {
@@ -108,22 +107,19 @@ angular.module('Ketch').factory('models', function(server) {
 	m.createTeam = function(team) {
 		server.createTeam(team)
 			.success(function(res) {
-				if (!res.success) {
-					console.log('Something went wrong...')
-					console.log('Error: ', res.message)
-					return
-				}
-				m.teams[res.team._id] = res.team
+				console.log('createTeam -> res: ', res)
+				m.teams[res._id] = res
+				console.log('m.teams[res._id] : ', m.teams[res._id])
+				return res
 			})
 	}
 
 	m.updateTeam = function(team) {
 		server.updateTeam(team)
 			.success(function(res) {
-				if (res.success) {
-					m.teams[team._id] = res.team
-					console.log('Team updated!')
-				}
+				console.log('updateTeam -> res: ', res)
+				m.teams[res._id] = res
+				return res
 			})
 	}
 

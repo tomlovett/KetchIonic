@@ -17,10 +17,24 @@
           <span class="input-label">Password</span>
           <input type="password" ng-model="main.loginData.password">
         </label>
+        <!-- signing up -->
         <label class="item item-input" ng-show="main.signingUp">
           <span class="input-label">Confirm Password</span>
           <input type="password" ng-model="main.loginData.password2">
         </label>
+
+        <div ng-show="main.signingUp"> 
+          <h4>About You</h4>
+          <label class="item item-input">
+            <span class="input-label">First Name</span>
+            <input type="text" ng-model="main.loginData.first">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Last Name</span>
+            <input type="text" ng-model="main.loginData.last">
+          </label>
+          <!-- gender -->
+        </div>
         <br><br><br><br><br><br><br>
         <label class="item item-toggle align-left">
         I'm new!

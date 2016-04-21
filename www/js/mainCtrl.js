@@ -7,6 +7,7 @@ angular.module('Ketch')
 
 	main.signingUp = false
 	main.loginData = {}
+	main.loginData.gender = 'm'
 
 	var verifyInput = function() {
 		main.errMsg = null
@@ -18,6 +19,8 @@ angular.module('Ketch')
 				main.errMsg = 'Sign-in failed. Passwords do not match.'
 			} else if (!main.loginData.password2) {
 				main.errMsg = 'No confirmation password.'
+			} else if (!main.loginData.first || !main.loginData.last || !main.loginData.gender) {
+				main.errMsg = 'Please fill out player data.'
 			}
 		}
 		return main.errMsg
@@ -43,7 +46,7 @@ angular.module('Ketch')
 		}
 		authToken.set(res.token)
 		console.log('Login success')
-		$state.go('team.manage')
+		$state.go('team.yourTeams')
 	}
 
 	main.tutorial = function() {
