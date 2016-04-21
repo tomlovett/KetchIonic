@@ -17,14 +17,15 @@ angular.module('Ketch')
 
 	initController()
 
-	mgmt.focusTeam = function(teamObj) {
-		console.log('focusTeam -> teamObj: ', teamObj)
-		mgmt.team   = teamObj
-		mgmt.roster = []
-		teamObj.roster.forEach(function(playerID) {
-			console.log('focusTeam -> forEach -> playerID: ', playerID)
-			mgmt.roster.push(models.player(playerID))
-		})
+	mgmt.focusTeam = function(team) {
+		console.log('focusTeam -> team: ', team)
+		models.callRoster(team._id)
+		mgmt.team   = team
+		// mgmt.roster = []
+		// teamObj.roster.forEach(function(playerID) {
+		// 	console.log('focusTeam -> forEach -> playerID: ', playerID)
+		// 	mgmt.roster.push(models.player(playerID))
+		// })
 		$state.go('team.oneTeam')
 	}
 

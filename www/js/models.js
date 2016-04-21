@@ -2,11 +2,12 @@ angular.module('Ketch').factory('models', function(server) {
 
 	var m = {}
 	
-	m.teams     = {}
-	m.players   = {}
+	m.teams   = {}
+	m.players = {}
+	m.roster  = []
 
-	m.game      = null
-	m.point     = { stats: {} }
+	m.game  = null
+	m.point = { stats: {} }
 
 	m.myTeams = function() {
 		server.myTeams()
@@ -32,20 +33,17 @@ angular.module('Ketch').factory('models', function(server) {
 		if (m.teams[teamID])  return m.teams[teamID]
 		server.team(teamID)
 			.success(function(res) {
-				if (res.success) {
+				console.log('m.team -> res: ', res)
 					m.teams[res._id] = res
 					return m.teams[teamID]
-				}
 			})
 	}
 
-	m.roster = function(teamID) {
-		if (!m.teams[teamID]) {
-			server.team(teamID)
-				.success(function(res) {
-					m.teams[team._id] = res.team
-				})
-		}
+	m.callRoster = function(teamID) {
+		server.roster(teamID)
+			.success(function(roster) {
+				m.roster = roster
+			})
 	}
 
 // Game \\

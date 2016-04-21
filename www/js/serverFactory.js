@@ -13,6 +13,10 @@ angular.module('Ketch').factory('server', function($http) {
 		return $http.get(addr + '/api/team/playerTeams')
 	}
 
+	srv.roster = function(teamID) {
+		return $http.get(addr + '/api/team/roster/' + teamID)
+	}
+
 	// Player management
 	srv.player = function(playerID) {
 		return $http.get(addr + '/api/player/' + playerID)

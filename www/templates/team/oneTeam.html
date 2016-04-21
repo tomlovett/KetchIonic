@@ -3,24 +3,22 @@
 		<div class="row" style="text-align: center">
 			<h3 class="col">{{mgmt.team.name}}</h3>
 		</div>
+
 		<div class="row" style="text-align: center">
 			<div class="col">Edit Team</div>
 			<div class="col">Stats</div>
 			<div class="col button button-balanced">+Game</div>
 		</div>
-		<!-- <p>mgmt.team.roster: {{mgmt.team.roster}}</p> -->
-		<!-- <p>mgmt.models.players: {{mgmt.models.players}}</p> -->
+
 		<div class="row">
 			<div class="col col-40">
-				<p ng-repeat="playerID in mgmt.team.roster" ng-click="mgmt.managePlayer(player)" class="player">
-			        {{mgmt.models.players[playerID].first + ' ' + mgmt.models.players[playerID].last }}
+				<p ng-repeat="player in mgmt.models.roster" ng-click="mgmt.managePlayer(player)" class="player">
+			        {{player.first + ' ' + player.last}}
 				</p>
 			</div>
 		</div>
-		<p>mgmt.roster: {{mgmt.roster}}</p>
-		<button ng-click="mgmt.managePlayer({})">Create player</button>
-		<!-- horizontal bar of teams; or dropdown box -->
-		<!-- ng-repeat roster for clicking -->
-			<!-- ! and C flair for non-verified, captains -->
+
+		<button class="button button-balanced" ng-click="mgmt.managePlayer({})">Add player</button>
+		<!-- add player by email; (big email format) -->
 	</ion-content>
 </ion-view>
