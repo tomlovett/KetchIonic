@@ -8,8 +8,7 @@ angular.module('Ketch')
 
 	mgmt.team   = null
 	mgmt.roster = []
-	mgmt.player = null
-
+	mgmt.player = {}
 
 	var initController = function() {
 		models.myTeams()
@@ -17,15 +16,14 @@ angular.module('Ketch')
 
 	initController()
 
+	mgmt.initGame = function() {
+		models.initGame(mgmt.team)
+		$state.go('game.subs')
+	}
+
 	mgmt.focusTeam = function(team) {
-		console.log('focusTeam -> team: ', team)
 		models.callRoster(team._id)
-		mgmt.team   = team
-		// mgmt.roster = []
-		// teamObj.roster.forEach(function(playerID) {
-		// 	console.log('focusTeam -> forEach -> playerID: ', playerID)
-		// 	mgmt.roster.push(models.player(playerID))
-		// })
+		mgmt.team = team
 		$state.go('team.oneTeam')
 	}
 
@@ -34,30 +32,29 @@ angular.module('Ketch')
 		$state.go('team.editTeam')
 	}
 
+	mgmt.submitTeam = function() {
+		if (mgmt.team._id) 		models.updateTeam(mgmt.team)
+		else					models.createTeam(mgmt.team)
+		$state.go('team.yourTeams')
+	}
+	
 	mgmt.managePlayer = function(player) {
 		mgmt.player = player || {}
 		$state.go('team.editPlayer')
 	}
 
-	mgmt.submitPlayer = function(done) {
-		console.log('submitPlayer fired')
-		console.log('done: ', done)
-		if (mgmt.player._id) { // new players will not have an _id property
-			models.updatePlayer(mgmt.player)
-		} else {
-			models.createPlayer(mgmt.player)
-		}
+	mgmt.submitPlayer = function() {
+		if (mgmt.player._id) 	models.updatePlayer(mgmt.player)
+		else					models.createPlayer(mgmt.player)
 		mgmt.player = {}
-		if (done)		$state.go('team.oneTeam')
+		$state.go('team.oneTeam')
+		// make current team auto-selected
+		// allow chain-building
 	}
 
-	mgmt.submitTeam = function() {
-		if (mgmt.team._id) { // new teams will not have an _id property
-			models.updateTeam(mgmt.team)
-		} else {
-			models.createTeam(mgmt.team)
-		}
-		$state.go('team.yourTeams')
-	}
+	// mgmt.emailDump
+		// enter a list of emails in reply-all format
+			// create multipe base-version players
+			// OR load existing from the database
 
 })

@@ -40,7 +40,11 @@ angular.module('Ketch').factory('server', function($http) {
 	}
 
 	srv.updateTeam = function(team) {
-		return $http.put(addr + '/api/team/' + team._id)
+		return $http.put(addr + '/api/team/' + team._id, team)
+	}
+
+	srv.rosterMove = function(obj) {
+		return $http.put(addr + '/api/team/rosterMove', obj)
 	}
 
 	// Game

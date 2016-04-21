@@ -11,7 +11,7 @@ angular.module('Ketch').factory('models', function(server) {
 
 	m.myTeams = function() {
 		server.myTeams()
-			.success(function(res) { // returns object of team objects
+			.success(function(res) { // returns array of team objects
 				res.forEach(function(team) {
 					m.teams[team._id] = team
 				})
@@ -20,7 +20,6 @@ angular.module('Ketch').factory('models', function(server) {
 	}
 
 	m.player = function(playerID) {
-		console.log('models.player -> playerID: ', playerID)
 		if (m.players[playerID])  return m.players[playerID]
 		server.player(playerID)
 			.success(function(res) {
@@ -33,9 +32,8 @@ angular.module('Ketch').factory('models', function(server) {
 		if (m.teams[teamID])  return m.teams[teamID]
 		server.team(teamID)
 			.success(function(res) {
-				console.log('m.team -> res: ', res)
-					m.teams[res._id] = res
-					return m.teams[teamID]
+				m.teams[res._id] = res
+				return m.teams[teamID]
 			})
 	}
 
@@ -46,14 +44,28 @@ angular.module('Ketch').factory('models', function(server) {
 			})
 	}
 
+	m.addToRoster = function(obj) {
+		// { teamID: 'abc', playerID: 'abc' }
+		server.intoRoster(obj)
+			.success(function(res) {
+				console.log('addToRoster -> res: ', res)
+				// re-set teams with new information
+			})
+	}
+
 // Game \\
-	m.initGame = function() {
-		m.game = {
+	m.initGame = function(team) {
+		var gameObj = {
+			teams  : [team._id],
 			score  : [0, 0],
-			points : []
-		} // placeholder
-		// post to server with teamID, work off returned object
-		// store full game locally, post to update?
+			points : [],
+			rosters: []
+		}
+		server.newGame(gameObj)
+			.success(function(res) {
+				console.log('initGame -> res: ', res)
+				m.game = res
+			})
 	}
 
 	m.recordScore = function(result) {
@@ -63,8 +75,8 @@ angular.module('Ketch').factory('models', function(server) {
 		m.point.result = result
 		server.score(m.point)
 			.success(function(res) {
-				console.log('Point recorded!')
-				m.game = res.game
+				console.log('recordScore -> res: ', res)
+				m.game = res
 				m.point = { stats: {} }
 			})
 	}
@@ -81,9 +93,9 @@ angular.module('Ketch').factory('models', function(server) {
 	m.updatePlayer = function(player) {
 		server.updatePlayer(player)
 			.success(function(res) {
+				console.log('updatePlayer -> res: ', res)
 				if (res.success) {
 					m.players[player._id] = res.player
-					console.log('Player updated!')
 				}
 			})
 	}
@@ -91,13 +103,14 @@ angular.module('Ketch').factory('models', function(server) {
 	m.createPlayer = function(player) {
 		server.createPlayer(player)
 			.success(function(res) {
-				if (res.success) {
-					res.teams.forEach(function(team) {
-						team.roster.push(player._id)
-						m.updateTeam(team)
-					})
-				} else {
-					console.log('Error: ', res.message)
+				for (teamID in res.teams) {
+					if (res.teams[teamID]) {
+						server.rosterMove({ team: teamID, player: res.player._id, add: true})
+							.success(function(resTwo) {
+								m.teams[resTwo._id] = resTwo
+								m.callRoster(resTwo._id)
+							})
+					}
 				}
 			})
 	}
@@ -105,9 +118,7 @@ angular.module('Ketch').factory('models', function(server) {
 	m.createTeam = function(team) {
 		server.createTeam(team)
 			.success(function(res) {
-				console.log('createTeam -> res: ', res)
 				m.teams[res._id] = res
-				console.log('m.teams[res._id] : ', m.teams[res._id])
 				return res
 			})
 	}

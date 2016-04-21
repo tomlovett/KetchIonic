@@ -21,11 +21,25 @@
           <input type="radio" name="gender" value="f">
         </label>        
         <!-- gender -->
-        <!-- add to these teams: -->
+
+        <h4>Add to teams:</h4>
+        <div class="list"> 
+          <div class="item item-toggle align-left" ng-repeat="(id, team) in mgmt.models.teams">
+            {{team.name}}
+            <label class="toggle">
+              <input ng-model="mgmt.player.teams[id]" type="checkbox">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+
         <label class="item">
-          <button class="button button-block button-positive" type="submit" ng-click="mgmt.submitPlayer(true)">Done</button>
-          <button class="button button-block button-positive" type="submit" ng-click="mgmt.submitPlayer(false)">And Another One</button>
+          <button class="button button-block button-positive" type="submit" ng-click="mgmt.submitPlayer()">Done</button>
+          <!-- <button class="button button-block button-positive" type="submit" ng-click="mgmt.submitPlayer('false')">And Another One</button> -->
         </label>
+
       </div>
     </form>
   </ion-content>

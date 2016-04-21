@@ -7,11 +7,11 @@
 		<div class="row" style="text-align: center">
 			<div class="col">Edit Team</div>
 			<div class="col">Stats</div>
-			<div class="col button button-balanced">+Game</div>
+			<div class="col button button-balanced" ng-click="mgmt.initGame()">+Game</div>
 		</div>
 
 		<div class="row">
-			<div class="col col-40">
+			<div class="col col-50">
 				<p ng-repeat="player in mgmt.models.roster" ng-click="mgmt.managePlayer(player)" class="player">
 			        {{player.first + ' ' + player.last}}
 				</p>

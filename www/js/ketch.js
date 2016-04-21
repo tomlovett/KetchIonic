@@ -35,22 +35,14 @@ angular.module('Ketch', [
 	// Game
 	.state('game', {
 		url        : '/game',
-		abstract   : true,
-		controller : 'gameCtrl', // as game,
-		// templateUrl: '/templates/sansMenu.html',
-		template: '<ion-nav-view></ion-nav-view>'
-		// plain template to hide sidemenu
-		// combining it into one? taking out one level?
-	})
-	.state('game.play', {
-		url         : '/play',
+		controller : 'gameCtrl as game',
 		templateUrl : '/templates/game/scoreboard.html',
-	})			
-	.state('game.play.subs', {
+	})	
+	.state('game.subs', {
 		url         : '/subs',
 		templateUrl : '/templates/game/subs.html',
 	})
-	.state('game.play.inPlay', {
+	.state('game.inPlay', {
 		url         : '/inPlay',
 		templateUrl : '/templates/game/inPlay.html',
 	})	
