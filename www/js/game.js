@@ -1,66 +1,83 @@
 angular.module('Ketch')
 .controller('gameCtrl', function(models, $state) {
 
-// auto-init game when built up enough
-	var game = this
+	var gm = this
+
+	gm.models = models
 
 	console.log('gameCtrl')
 
-	game.player = null
-	game.stat   = null
+	gm.player = null
+	gm.stat   = null
 
-	game.field = []
-	game.bench = []
+	gm.field = []
+	gm.bench = []
+	gm.team  = null
 
-	var refreshGame = function() {
-		game.game = models.pullGame()
+	var initController = function() {
+		gm.bench = models.roster
+		gm.game = {
+			teams  : [models.gameTeam._id],
+			score  : [0, 0],
+			points : [],
+			rosters: []
+		}
+		models.initGame(gm.game)
 	}
 
-	game.doneSubs = function() {
-		models.line(game.field)
-		$state.go('game.play.inPlay')
+	initController()
+
+	// var refreshGame = function() {
+	// 	gm.game = models.pullGame()
+	// }
+
+	// Game Flow
+	gm.doneSubs = function() {
+		models.line(gm.field)
+		$state.go('game.inPlay')
 	}
 
-	game.recordScore = function(result) {
+	gm.recordScore = function(result) {
 		models.recordScore(result)
-		$state.go('game.play.subs')
+		$state.go('game.subs')
 	}
 
-	game.recordStat = function(clicked) {
+	gm.recordStat = function(clicked) {
 		if (typeof clicked === 'string') { // stats pass string values
-			if (game.stat)     { game.stat = null    }
-			else               { game.stat = clicked }
+			if (gm.stat)	{ gm.stat = null    }
+			else            { gm.stat = clicked }
 		} else {						   // players pass player objects
-			if (game.player)   { game.player = null    }
-			else 			   { game.player = clicked }
+			if (gm.player)  { gm.player = null   	  }
+			else 			{ gm.player = clicked._id }
 		}
-		if (game.player && game.stat) {
-			models.stat(game.player, game.stat)
-			game.player = null
-			game.stat   = null			
+		if (gm.player && gm.stat) {
+			models.stat(gm.player, gm.stat)
+			gm.player = null
+			gm.stat   = null			
 		}
 	}
 
-	game.move = function(player, from, to) {
+	// Substitutions
+	gm.move = function(player, from, to) {
 		var index = from.indexOf(player)
 		to.push(from.splice(index, 1)[0])
 	}
 
-	game.clearLine = function() {
-		while (game.field.length > 0) {
-			game.move(game.field[0], game.field, game.bench)
+	gm.clearLine = function() {
+		while (gm.field.length > 0) {
+			gm.move(gm.field[0], gm.field, gm.bench)
 		}
 	}
 
-	// game.closeGame = function() {
+	// gm.closeGame = function() {
 	// }
 
-	// game.toScoreSummary = function() {
+	// gm.toScoreSummary = function() {
 	// 	$state.go('scoreSummary')
 	// }
 
-	// game.backToGame = function() {
-	// 	$state.go('game')
+	// gm.backToGame = function() {
+	// 	$state.go('gm')
 	// }
 
 })

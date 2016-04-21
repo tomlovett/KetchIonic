@@ -6,8 +6,9 @@ angular.module('Ketch').factory('models', function(server) {
 	m.players = {}
 	m.roster  = []
 
-	m.game  = null
-	m.point = { stats: {} }
+	m.game     = null
+	m.gameTeam = null
+	m.point    = { line: [], stats: {} }
 
 	m.myTeams = function() {
 		server.myTeams()
@@ -44,27 +45,21 @@ angular.module('Ketch').factory('models', function(server) {
 			})
 	}
 
-	m.addToRoster = function(obj) {
-		// { teamID: 'abc', playerID: 'abc' }
-		server.intoRoster(obj)
+	m.rosterMove = function(obj) {
+		// obj = { teamID: 'abc', playerID: 'abc', add: Bool }
+		server.rosterMove(obj)
 			.success(function(res) {
 				console.log('addToRoster -> res: ', res)
-				// re-set teams with new information
+				m.teams[res._id] = res
 			})
 	}
 
 // Game \\
-	m.initGame = function(team) {
-		var gameObj = {
-			teams  : [team._id],
-			score  : [0, 0],
-			points : [],
-			rosters: []
-		}
+	m.initGame = function(gameObj) {
+		m.gameTeam = m.team(gameObj.teams[0])
 		server.newGame(gameObj)
 			.success(function(res) {
-				console.log('initGame -> res: ', res)
-				m.game = res
+				m.game = res.game
 			})
 	}
 
@@ -73,11 +68,11 @@ angular.module('Ketch').factory('models', function(server) {
 		else		{ m.game.score[1] += 1 }
 		// keeping the above line so feedback is instantenous
 		m.point.result = result
-		server.score(m.point)
+		m.game.points.push(m.point)
+		server.updateGame(m.game)
 			.success(function(res) {
-				console.log('recordScore -> res: ', res)
 				m.game = res
-				m.point = { stats: {} }
+				m.point = { line: [], stats: {} }
 			})
 	}
 
@@ -86,17 +81,18 @@ angular.module('Ketch').factory('models', function(server) {
 	}
 
 	m.line = function(line) {
-		m.point.line = line
+		line.forEach(function(player) {
+			m.point.line.push(player._id)
+		})
 	}
 
 // Management \\
 	m.updatePlayer = function(player) {
 		server.updatePlayer(player)
 			.success(function(res) {
-				console.log('updatePlayer -> res: ', res)
-				if (res.success) {
-					m.players[player._id] = res.player
-				}
+				m.players[player._id] = res.player
+				var index = m.roster.indexOf(res.player)
+				if (index)  m.roster[index] = res.player 
 			})
 	}
 
@@ -126,7 +122,6 @@ angular.module('Ketch').factory('models', function(server) {
 	m.updateTeam = function(team) {
 		server.updateTeam(team)
 			.success(function(res) {
-				console.log('updateTeam -> res: ', res)
 				m.teams[res._id] = res
 				return res
 			})

@@ -7,8 +7,8 @@
                     <input type="text" autofocus="true" ng-model="mgmt.team.name">
                 </label>
                     <label class="item item-input">
-                    <span class="input-label">Abbreviation (6 chars. max)</span>
-                    <input type="text" ng-model="mgmt.team.short">
+                    <span class="input-label">Abbreviation (max 8 chars.)</span>
+                    <input type="text" maxlength="8" ng-model="mgmt.team.short">
                 </label>
                 <p>i.e.: "Stack to the Future" -> "Stack" or "SttF"</p>
                 <!-- main color -->

@@ -27,7 +27,7 @@ angular.module('Ketch').factory('server', function($http) {
 	}
 
 	srv.updatePlayer = function(player) {
-		return $http.put(addr + '/api/player/' + player._id, player)
+		return $http.put(addr + '/api/player', player)
 	}
 
 	// Team management
@@ -56,8 +56,12 @@ angular.module('Ketch').factory('server', function($http) {
 		return $http.post(addr + '/api/game', game)
 	}
 
+	// srv.score = function(game) {
+	// 	return $http.put(addr + '/api/game', game)
+	// }
+
 	srv.updateGame = function(game) {
-		return $http.put(addr + '/api/game/' + game._id, game)
+		return $http.put(addr + '/api/game', game)
 	}
 
 	return srv

@@ -17,13 +17,14 @@ angular.module('Ketch')
 	initController()
 
 	mgmt.initGame = function() {
-		models.initGame(mgmt.team)
+		// models.initGame(mgmt.team)
 		$state.go('game.subs')
 	}
 
 	mgmt.focusTeam = function(team) {
 		models.callRoster(team._id)
 		mgmt.team = team
+		models.gameTeam = mgmt.team
 		$state.go('team.oneTeam')
 	}
 
@@ -33,8 +34,9 @@ angular.module('Ketch')
 	}
 
 	mgmt.submitTeam = function() {
-		if (mgmt.team._id) 		models.updateTeam(mgmt.team)
-		else					models.createTeam(mgmt.team)
+		if (!mgmt.team._id) models.createTeam(mgmt.team)
+		else				models.updateTeam(mgmt.team)
+			// checking for changes before submitting
 		$state.go('team.yourTeams')
 	}
 	

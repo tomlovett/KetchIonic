@@ -35,7 +35,7 @@ angular.module('Ketch', [
 	// Game
 	.state('game', {
 		url        : '/game',
-		controller : 'gameCtrl as game',
+		controller : 'gameCtrl as gm',
 		templateUrl : '/templates/game/scoreboard.html',
 	})	
 	.state('game.subs', {

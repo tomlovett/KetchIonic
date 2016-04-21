@@ -2,10 +2,10 @@
 
 	<div class="row">
     <div class="col col-33">
-      <h3 ng-click="recordScore(1)">We Scored!</h3>
+      <h3 ng-click="gm.recordScore(1)">We Scored!</h3>
     </div>
     <div class="col col-33 col-offset-33">
-      <h3 ng-click="recordScore(0)">They Scored...</h3>
+      <h3 ng-click="gm.recordScore(0)">They Scored...</h3>
     </div> 
   </div>
 
@@ -19,18 +19,18 @@
 	</div>
 	<div class="row">
 		<div class="col col-50">
-			<p ng-click="recordStat('throwaway')">Throwaway</p>
-			<p ng-click="recordStat('drop')">Drop</p>
-			<p ng-click="recordStat('D')">D</p>
-			<p ng-click="recordStat('goldStar')">Gold Star</p>
+			<p ng-click="gm.recordStat('throwaway')">Throwaway</p>
+			<p ng-click="gm.recordStat('drop')">Drop</p>
+			<p ng-click="gm.recordStat('D')">D</p>
+			<p ng-click="gm.recordStat('goldStar')">Gold Star</p>
 		</div>
 
     <div class="col col-25 col-offset-20">
       <p 
-        ng-repeat="player in field | orderBy: ['gender', 'handle']"
-        ng-click="recordStat(player)"
+        ng-repeat="player in gm.field | orderBy: ['gender', 'handle']"
+        ng-click="gm.recordStat(player)"
         class="player {{player.gender}}">
-        {{player.handle}}
+        {{player.handle || player.first}}
       </p>
 		</div>
 	</div>	

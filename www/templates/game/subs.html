@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="col col-33 col-offset-33">
-      <h3 ng-click="doneSubs()">Done Subs</h3>
+      <h3 ng-click="gm.doneSubs()">Done Subs</h3>
     </div>
   </div>
 
@@ -19,14 +19,14 @@
   </div>
 	<div class="row">
 		<div class="col col-25">
-      <p ng-repeat="guy in bench | filter: {gender: 'm'} | orderBy: 'handle'" ng-click="move(guy, bench, field)" class="m player">{{guy.handle}}</p>
+      <p ng-repeat="guy in gm.bench | filter: {gender: 'm'} | orderBy: ['handle', 'first']" ng-click="gm.move(guy, gm.bench, gm.field)" class="m player">{{guy.handle || guy.first}}</p>
 		</div>
     <div class="col col-25">
-      <p ng-repeat="girl in bench | filter: {gender: 'f'} | orderBy: 'handle'" ng-click="move(girl, bench, field)" class="f player">{{girl.handle}}</p>
+      <p ng-repeat="girl in gm.bench | filter: {gender: 'f'} | orderBy: 'handle'" ng-click="gm.move(girl, gm.bench, gm.field)" class="f player">{{girl.handle || girl.first}}</p>
     </div>
     <div class="col col-25 col-offset-20">
-      <p ng-repeat="player in field | orderBy: ['gender', 'handle']" ng-click="move(player, field, bench)" class="player {{player.gender}}" >{{player.handle}}</p>
-      <p ng-click="clearLine()">Clear Line</p>
+      <p ng-repeat="player in gm.field | orderBy: ['gender', 'handle']" ng-click="gm.move(player, gm.field, gm.bench)" class="player {{player.gender}}" >{{player.handle || player.first}}</p>
+      <p ng-click="gm.clearLine()">Clear Line</p>
     </div>
 	</div>
 
