@@ -1,5 +1,4 @@
 angular.module('Ketch').factory('server', function($http) {
-// cut out dependency later
 
 	var addr = 'http://localhost:3000'
 
@@ -40,7 +39,11 @@ angular.module('Ketch').factory('server', function($http) {
 	}
 
 	srv.updateTeam = function(team) {
-		return $http.put(addr + '/api/team/' + team._id, team)
+		return $http.put(addr + '/api/team', team)
+	}
+
+	srv.roster = function(teamID) {
+		return $http.get(addr + '/api/team/roster/' + teamID)
 	}
 
 	srv.rosterMove = function(obj) {

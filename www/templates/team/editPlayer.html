@@ -26,7 +26,7 @@
           <div class="item item-toggle align-left" ng-repeat="(id, team) in mgmt.models.teams">
             {{team.name}}
             <label class="toggle">
-              <input ng-model="mgmt.player.teams[id]" type="checkbox">
+              <input ng-model="mgmt.status[id]" type="checkbox">
               <div class="track">
                 <div class="handle"></div>
               </div>

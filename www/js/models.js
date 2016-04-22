@@ -13,10 +13,9 @@ angular.module('Ketch').factory('models', function(server) {
 	m.myTeams = function() {
 		server.myTeams()
 			.success(function(res) { // returns array of team objects
-				res.forEach(function(team) {
+				res.teams.forEach(function(team) {
 					m.teams[team._id] = team
 				})
-				return m.teams
 			})
 	}
 
@@ -24,7 +23,7 @@ angular.module('Ketch').factory('models', function(server) {
 		if (m.players[playerID])  return m.players[playerID]
 		server.player(playerID)
 			.success(function(res) {
-				m.players[res._id] = res
+				m.players[res.player._id] = res.player
 				return m.players[playerID]
 			})		
 	}
@@ -33,24 +32,77 @@ angular.module('Ketch').factory('models', function(server) {
 		if (m.teams[teamID])  return m.teams[teamID]
 		server.team(teamID)
 			.success(function(res) {
-				m.teams[res._id] = res
+				m.teams[res.team._id] = res.team
+				res.team.roster.forEach(function(playerID) {
+					m.player(playerID)
+				})
 				return m.teams[teamID]
 			})
 	}
 
-	m.callRoster = function(teamID) {
-		server.roster(teamID)
-			.success(function(roster) {
-				m.roster = roster
+	m.loadRoster = function(team) {
+		server.roster(team._id)
+			.success(function(res) {
+				m.roster = res.roster
 			})
 	}
 
-	m.rosterMove = function(obj) {
-		// obj = { teamID: 'abc', playerID: 'abc', add: Bool }
-		server.rosterMove(obj)
+	m.rosterMove = function(playerID, team) {
+		console.log('rosterMove')
+		var index = team.roster.indexOf(playerID)
+		if (index == -1) 	team.roster.push(playerID)
+		else				team.roster.splice(index, 1)
+		m.updateTeam(team)
+	}
+
+
+// Management \\
+	m.updatePlayer = function(player, status) {
+		server.updatePlayer(player)
 			.success(function(res) {
-				console.log('addToRoster -> res: ', res)
-				m.teams[res._id] = res
+				m.players[player._id] = res.player
+				verifyRosterStatus(res.player, status)
+				return res.player
+			})
+	} // can combine these two into one with a little finagling
+
+	m.createPlayer = function(player, status) {
+		server.createPlayer(player)
+			.success(function(res) {
+				m.players[res.player._id] = res.player
+				verifyRosterStatus(res.player, status)
+				return res.player
+			})
+	}
+
+	var verifyRosterStatus = function(player, status) {
+		for (teamID in status) {
+			var team = m.teams[teamID]
+			var index = team.roster.indexOf(player._id)
+			var actual = (index !== -1)
+			if (status.team !== actual) {
+				m.rosterMove(player._id, team)
+			}
+		}
+	}
+
+	m.createTeam = function(team) {
+		server.createTeam(team)
+			.success(function(res) {
+				m.teams[res.team._id] = res.team
+				return res.team
+			})
+	}
+
+	m.updateTeam = function(team) {
+		server.updateTeam(team)
+			.success(function(res) {
+				m.teams[res.team._id] = res.team
+				if (res.team._id == m.gameTeam._id) { // live updates
+					m.gameTeam = res.team
+					m.loadRoster(res.team)
+				}
+				return res.team
 			})
 	}
 
@@ -66,12 +118,11 @@ angular.module('Ketch').factory('models', function(server) {
 	m.recordScore = function(result) {
 		if (result) { m.game.score[0] += 1 }
 		else		{ m.game.score[1] += 1 }
-		// keeping the above line so feedback is instantenous
 		m.point.result = result
 		m.game.points.push(m.point)
 		server.updateGame(m.game)
 			.success(function(res) {
-				m.game = res
+				m.game = res.game
 				m.point = { line: [], stats: {} }
 			})
 	}
@@ -84,47 +135,6 @@ angular.module('Ketch').factory('models', function(server) {
 		line.forEach(function(player) {
 			m.point.line.push(player._id)
 		})
-	}
-
-// Management \\
-	m.updatePlayer = function(player) {
-		server.updatePlayer(player)
-			.success(function(res) {
-				m.players[player._id] = res.player
-				var index = m.roster.indexOf(res.player)
-				if (index)  m.roster[index] = res.player 
-			})
-	}
-
-	m.createPlayer = function(player) {
-		server.createPlayer(player)
-			.success(function(res) {
-				for (teamID in res.teams) {
-					if (res.teams[teamID]) {
-						server.rosterMove({ team: teamID, player: res.player._id, add: true})
-							.success(function(resTwo) {
-								m.teams[resTwo._id] = resTwo
-								m.callRoster(resTwo._id)
-							})
-					}
-				}
-			})
-	}
-
-	m.createTeam = function(team) {
-		server.createTeam(team)
-			.success(function(res) {
-				m.teams[res._id] = res
-				return res
-			})
-	}
-
-	m.updateTeam = function(team) {
-		server.updateTeam(team)
-			.success(function(res) {
-				m.teams[res._id] = res
-				return res
-			})
 	}
 
 	return m
