@@ -59,12 +59,40 @@ angular.module('Ketch').factory('server', function($http) {
 		return $http.post(addr + '/api/game', game)
 	}
 
-	// srv.score = function(game) {
-	// 	return $http.put(addr + '/api/game', game)
-	// }
-
 	srv.updateGame = function(game) {
 		return $http.put(addr + '/api/game', game)
+	}
+
+	// Stats
+	srv.teamGames = function(teamID) {
+		return $http.get(addr + '/api/stats/team/games/' + teamID)		
+	}
+
+	srv.teamPoints = function(teamID) {
+		return $http.get(addr + '/api/stats/team/points/' + teamID)		
+	}
+
+	srv.playerGames = function(playerID) {
+		return $http.get(addr + '/api/stats/player/games/' + playerID)		
+	}
+
+	srv.playerPoints = function(playerID) {
+		return $http.get(addr + '/api/stats/player/points/' + playerID)		
+	}
+
+	srv.gamesWith = function(teamID, playerID) {
+		var URL = addr + '/api/stats/gamesWith/' + teamID + '/' + playerID
+		return $http.get(URL)		
+	}
+
+	srv.pointsWith = function(teamID, playerID) {
+		var URL = addr + '/api/stats/pointsWith/' + teamID + '/' + playerID
+		return $http.get(URL)		
+	}
+
+	srv.friends = function(playerA, playerB) {
+		var URL = addr + '/api/stats/friends/' + playerA + '/' + playerB
+		return $http.get(URL)
 	}
 
 	return srv
