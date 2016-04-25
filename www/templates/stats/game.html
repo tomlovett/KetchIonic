@@ -1,10 +1,21 @@
 <ion-view>
 	<ion-content>
 
-	<!-- upper block: Us vs. Them, score, date -->
+	<!-- upper block: Us vs. Them, score, [date] -->
 
-	<!-- ng-repeat: Player Points: +/-: -->
-	<!-- expand: Stats:  -->
+	<h4>{{mgmt.models.team(stats.team).name}}</h4>
+	<p>stats.team: {{stats.team}}</p>
+
+
+	<ul class="list">
+		<li class="list-item" ng-repeat="playerID in stats.game.roster">
+			{{stats.models.player(playerID).handle}}
+			Points: {{stats.total[playerID]}}
+			+/-: {{stats.plusMinus[playerID]}}
+		</li>
+	</ul>
+
+	<p>stats.game.roster: {{stats.game.roster}}</p>
 
 	</ion-content>
 </ion-view>

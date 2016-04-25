@@ -64,35 +64,45 @@ angular.module('Ketch').factory('server', function($http) {
 	}
 
 	// Stats
-	srv.teamGames = function(teamID) {
-		return $http.get(addr + '/api/stats/team/games/' + teamID)		
+	srv.loadStats = function(id, group, type) {
+		// group = (team || player), type = (games || points)
+		var route = '/api/stats/' + group + '/' + type + '/' + id
+		return $http.get(addr + route)
 	}
 
-	srv.teamPoints = function(teamID) {
-		return $http.get(addr + '/api/stats/team/points/' + teamID)		
+	srv.gameStats = function(id) {
+		return $http.get(addr + '/api/stats/game/' + id)
 	}
 
-	srv.playerGames = function(playerID) {
-		return $http.get(addr + '/api/stats/player/games/' + playerID)		
-	}
+	// srv.teamGames = function(teamID) {
+	// 	return $http.get(addr + '/api/stats/team/games/' + teamID)		
+	// }
 
-	srv.playerPoints = function(playerID) {
-		return $http.get(addr + '/api/stats/player/points/' + playerID)		
-	}
+	// srv.teamPoints = function(teamID) {
+	// 	return $http.get(addr + '/api/stats/team/points/' + teamID)		
+	// }
+
+	// srv.playerGames = function(playerID) {
+	// 	return $http.get(addr + '/api/stats/player/games/' + playerID)		
+	// }
+
+	// srv.playerPoints = function(playerID) {
+	// 	return $http.get(addr + '/api/stats/player/points/' + playerID)		
+	// }
 
 	srv.gamesWith = function(teamID, playerID) {
-		var URL = addr + '/api/stats/gamesWith/' + teamID + '/' + playerID
-		return $http.get(URL)		
+		var route = '/api/stats/gamesWith/' + teamID + '/' + playerID
+		return $http.get(addr + route)		
 	}
 
 	srv.pointsWith = function(teamID, playerID) {
-		var URL = addr + '/api/stats/pointsWith/' + teamID + '/' + playerID
-		return $http.get(URL)		
+		var route = '/api/stats/pointsWith/' + teamID + '/' + playerID
+		return $http.get(addr + route)		
 	}
 
 	srv.friends = function(playerA, playerB) {
-		var URL = addr + '/api/stats/friends/' + playerA + '/' + playerB
-		return $http.get(URL)
+		var route = '/api/stats/friends/' + playerA + '/' + playerB
+		return $http.get(addr + route)
 	}
 
 	return srv

@@ -51,6 +51,7 @@ angular.module('Ketch')
 			else 			{ gm.player = clicked._id }
 		}
 		if (gm.player && gm.stat) {
+			console.log('stat recorded!')
 			models.stat(gm.player, gm.stat)
 			gm.player = null
 			gm.stat   = null			

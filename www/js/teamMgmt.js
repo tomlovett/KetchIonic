@@ -47,6 +47,7 @@ angular.module('Ketch')
 	}
 
 	mgmt.submitPlayer = function() {
+		if (!mgmt.player.handle)	mgmt.player.handle = mgmt.player.first
 		if (mgmt.player._id) 	models.updatePlayer(mgmt.player, mgmt.status)
 		else					models.createPlayer(mgmt.player, mgmt.status)
 		mgmt.player = {}

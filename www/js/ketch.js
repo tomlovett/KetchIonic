@@ -46,10 +46,10 @@ angular.module('Ketch', [
 		url         : '/inPlay',
 		templateUrl : '/templates/game/inPlay.html',
 	})	
-	// 	.state('game.scoreSummary', {
-	// 		url         : '/scoreSummary',
-	// 		templateUrl : '/templates/game/scoreSummary.html',
-	// 	})
+	.state('game.scoreSummary', {
+		url         : '/scoreSummary',
+		templateUrl : '/templates/game/scoreSummary.html',
+	})
 	// Team management
 	.state('team', {
 		url         : '/team',
@@ -81,9 +81,29 @@ angular.module('Ketch', [
 
 	// url: ..., views: { 'mainContent' : {templateUrl: ... } }
 	
-	// stats
-		// player
-			// expansions
+	.state('stats', {
+		url         : '/stats',
+		abstract	: true,
+		controller	: 'statsCtrl as stats',
+		template 	: '<ion-nav-view></ion-nav-view>',
+	})
+	.state('stats.home', {
+		url         : '/home',
+		templateUrl : '/templates/stats/home.html'
+	})
+	.state('stats.game', {
+		url         : '/game',
+		templateUrl : '/templates/stats/game.html'
+	})
+	.state('stats.games', {
+		url         : '/games',
+		templateUrl : '/templates/stats/games.html'
+	})
+	.state('stats.points', {
+		url         : '/points',
+		templateUrl : '/templates/stats/points.html'
+	})
+
 	// ratings
 	$urlRouterProvider.otherwise('/login')
 })

@@ -1,0 +1,19 @@
+<ion-view>
+	<ion-content>
+
+	<h3>Your Teams</h3>
+	<ul class="list">
+		<li class="list-item" ng-repeat="(id, team) in stats.models.teams | orderBy: 'name'" ng-click="stats.fireTeam(team)">
+			{{team.name}}
+		</li>
+	</ul>
+
+	<h3>Your Players</h3>
+	<ul class="list">
+		<li class="list-item" ng-repeat="(id, player) in stats.models.players | orderBy: 'handle'" ng-click="stats.firePlayer(player)">
+			{{player.handle + player.last}}
+		</li>
+	</ul>
+
+	</ion-content>
+</ion-view>

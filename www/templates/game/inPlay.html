@@ -27,7 +27,7 @@
 
     <div class="col col-25 col-offset-20">
       <p 
-        ng-repeat="player in gm.field | orderBy: ['gender', 'handle']"
+        ng-repeat="player in gm.field | orderBy: ['gender'] | orderBy: ['handle', 'first']"
         ng-click="gm.recordStat(player)"
         class="player {{player.gender}}">
         {{player.handle || player.first}}
