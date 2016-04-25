@@ -1,5 +1,6 @@
 <ion-view>
 	<ion-content>
+
 	<div class="row">
 		<div class="col">
 			<h2>Your Teams</h2>
@@ -8,10 +9,13 @@
 			<button class="button button-balanced" ng-click="mgmt.manageTeam()">+Team</button>
 		</div>
 	</div>
+	
 	<ul class="list">
+		<li><a ui-sref="team.allPlayers">All Players</a></li>
 		<li class="item" ng-repeat="(id, team) in mgmt.models.teams" ng-click="mgmt.focusTeam(team)">
 			{{team.name}}
 		</li>
 	</ul>
+
 	</ion-content>
 </ion-view>

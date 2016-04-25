@@ -74,6 +74,10 @@ angular.module('Ketch', [
 		url         : '/editPlayer',
 		templateUrl : '/templates/team/editPlayer.html'
 	})
+	.state('team.allPlayers', {
+		url         : '/allPlayers',
+		templateUrl : '/templates/team/allPlayers.html'
+	})
 
 	// url: ..., views: { 'mainContent' : {templateUrl: ... } }
 	

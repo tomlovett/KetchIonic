@@ -1,1 +1,19 @@
-ng-repeat="(id, player) in mgmt.models.players | orderBy: ['handle', first']"
+<ion-view>
+	<ion-content>
+		<div class="row" style="text-align: center">
+			<h3 class="col">All Players</h3>
+		</div>
+
+		<p>mgmt.models.players: {{mgmt.models.players}}
+
+		<div class="row">
+			<div class="col col-50">
+				<p ng-repeat="(id, player) in mgmt.models.players | orderBy: ['handle', 'first']" ng-click="mgmt.managePlayer(player)" class="player">
+			        {{player.first + ' ' + player.last}}
+				</p>
+			</div>
+		</div>
+
+		<!-- <button class="button button-balanced" ng-click="mgmt.managePlayer({})">Add player</button> -->
+	</ion-content>
+</ion-view>

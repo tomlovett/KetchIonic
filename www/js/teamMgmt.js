@@ -65,8 +65,8 @@ angular.module('Ketch')
 				mgmt.status[teamID] = (index !== 1)
 			}
 		}
-		if (!player._id)  mgmt.status[mgmt.team._id] = true
-		console.log('mgmt.status: ', mgmt.status)
+		if (!player._id && $state.current.url == '/oneTeam' )
+		mgmt.status[mgmt.team._id] = true // do not fire from allPlayers
 	}
 
 	// mgmt.emailDump
