@@ -19,13 +19,17 @@
   </div>
 	<div class="row">
 		<div class="col col-25">
-      <p ng-repeat="guy in gm.bench | filter: {gender: 'm'} | orderBy: ['handle', 'first']" ng-click="gm.move(guy, gm.bench, gm.field)" class="m player">{{guy.handle || guy.first}}</p>
+      <p ng-repeat="guy in gm.bench | filter: {gender: 'm'} | orderBy: 'handle'" ng-click="gm.move(guy, gm.bench, gm.field)" class="player {{gm.models.gameTeam.secondary}}">{{guy.handle || guy.first}}</p>
 		</div>
     <div class="col col-25">
-      <p ng-repeat="girl in gm.bench | filter: {gender: 'f'} | orderBy: 'handle'" ng-click="gm.move(girl, gm.bench, gm.field)" class="f player">{{girl.handle || girl.first}}</p>
+      <p ng-repeat="girl in gm.bench | filter: {gender: 'f'} | orderBy: 'handle'" ng-click="gm.move(girl, gm.bench, gm.field)" class="player {{gm.models.gameTeam.primary}}">{{girl.handle || girl.first}}</p>
     </div>
+
     <div class="col col-25 col-offset-20">
-      <p ng-repeat="player in gm.field | orderBy: ['gender', 'handle']" ng-click="gm.move(player, gm.field, gm.bench)" class="player {{player.gender}}" >{{player.handle || player.first}}</p>
+      <p ng-repeat="player in gm.field | filter: {gender: 'f'} | orderBy: 'handle'" ng-click="gm.move(player, gm.field, gm.bench)" class="player {{gm.models.gameTeam.primary}}" >{{player.handle || player.first}}</p>
+
+      <p ng-repeat="player in gm.field | filter: {gender: 'm'} | orderBy: 'handle'" ng-click="gm.move(player, gm.field, gm.bench)" class="player {{gm.models.gameTeam.secondary}}" >{{player.handle || player.first}}</p>
+
       <p ng-click="gm.clearLine()">Clear Line</p>
     </div>
 	</div>

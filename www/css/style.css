@@ -1,19 +1,63 @@
 /* Empty. Add your own CSS if you like */
 .player {
 	padding-left: 5px;
-/*	border-radius: : 2px;
-*/}
-
-.m {
-	background-color: blue;
-	border-radius: 5px;
-}
-
-.f {
-	background-color: red;
 	border-radius: 5px;
 }
 
 .scoreboard {
 	font-size: 72px;
+}
+
+/* Team color schemes */
+.red {
+	background-color: #C91111;
+	color: white;
+}
+.orange {
+	background-color: #FF8000;
+	color: white;
+}
+.yellow {
+	background-color: #F6EB20;
+	color: black;
+}
+.light-green {
+	background-color: #51C201;
+	color: white;
+}
+.green {
+	background-color: #1C8E0D;
+	color: white;
+}
+.light-blue {
+	background-color: #09C5F4;
+	color: white;
+}
+.blue {
+	background-color: #2862B9;
+	color: white;
+}
+.purple {
+	background-color: #7E44BC;
+	color: white;
+}
+.white {
+	background-color: #FFFFFF;
+	color: black;
+}
+.brown {
+	background-color: #943F07;
+	color: white;
+}
+.black {
+	background-color: #000000;
+	color: white;
+}
+.grey {
+	background-color: #808080;
+	color: white;
+}
+.hot-pink {
+	background-color: #F863CB;
+	color: white;
 }

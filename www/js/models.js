@@ -76,11 +76,11 @@ angular.module('Ketch').factory('models', function(server) {
 	}
 
 	var verifyRosterStatus = function(player, status) {
-		for (teamID in status) {
-			var team = m.teams[teamID]
-			var index = team.roster.indexOf(player._id)
+		for (var teamID in status) {
+			var team   = m.teams[teamID]
+			var index  = team.roster.indexOf(player._id)
 			var actual = (index !== -1)
-			if (status.team !== actual) {
+			if (status[teamID] !== actual) {
 				m.rosterMove(player._id, team)
 			}
 		}

@@ -26,6 +26,7 @@ angular.module('Ketch')
 		models.loadRoster(team)
 		models.gameTeam = team
 		mgmt.team       = team
+		console.log('mgmt.team: ', mgmt.team)
 		$state.go('team.oneTeam')
 	}
 
@@ -35,6 +36,7 @@ angular.module('Ketch')
 	}
 
 	mgmt.submitTeam = function() {
+		console.log('submitTeam -> mgmt.team: ', mgmt.team)
 		if (!mgmt.team._id) models.createTeam(mgmt.team)
 		else				models.updateTeam(mgmt.team)
 		$state.go('team.yourTeams')
@@ -50,6 +52,7 @@ angular.module('Ketch')
 		if (!mgmt.player.handle)	mgmt.player.handle = mgmt.player.first
 		if (mgmt.player._id) 	models.updatePlayer(mgmt.player, mgmt.status)
 		else					models.createPlayer(mgmt.player, mgmt.status)
+		// create/updatePlayer -> rosterMove -> updateTeam -> loadRoster
 		mgmt.player = {}
 		$state.go('team.oneTeam')
 		// allow chain-building
@@ -67,8 +70,9 @@ angular.module('Ketch')
 			}
 		}
 		if (!player._id && $state.current.url == '/oneTeam' )
-		mgmt.status[mgmt.team._id] = true // do not fire from allPlayers
+			mgmt.status[mgmt.team._id] = true // do not fire from allPlayers
 	}
+
 
 	// mgmt.emailDump
 		// enter a list of emails in reply-all format

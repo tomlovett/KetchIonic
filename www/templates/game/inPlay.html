@@ -27,11 +27,16 @@
 
     <div class="col col-25 col-offset-20">
       <p 
-        ng-repeat="player in gm.field | orderBy: ['gender'] | orderBy: ['handle', 'first']"
+        ng-repeat="player in gm.field | filter: {gender: 'f'} | orderBy: 'handle'"
         ng-click="gm.recordStat(player)"
-        class="player {{player.gender}}">
+        class="player {{gm.models.gameTeam.primary}}">
         {{player.handle || player.first}}
       </p>
-		</div>
+      <p 
+        ng-repeat="player in gm.field | filter: {gender: 'm'} | orderBy: 'handle'"
+        ng-click="gm.recordStat(player)"
+        class="player {{gm.models.gameTeam.secondary}}">
+        {{player.handle || player.first}}
+      </p>		</div>
 	</div>	
 </div>

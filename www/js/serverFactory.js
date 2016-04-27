@@ -4,9 +4,9 @@ angular.module('Ketch').factory('server', function($http) {
 
 	var srv = {}
 
-	srv.me = function() {
-		return $http.get(addr + '/api/player')
-	}
+	// srv.me = function() {
+	// 	return $http.get(addr + '/api/player')
+	// }
 
 	srv.myTeams = function() {
 		return $http.get(addr + '/api/team/playerTeams')

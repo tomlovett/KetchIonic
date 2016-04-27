@@ -5,9 +5,9 @@ angular.module('Ketch')
 	console.log('statsCtrl')
 
 	stats.models = models
+	stats.team   = models.gameTeam
 
 	stats.player = null
-	stats.team   = null
 	stats.game   = null
 	stats.games  = null
 	stats.points = null
@@ -24,6 +24,11 @@ angular.module('Ketch')
 		stats.player = player
 		stats.load(player._id, 'player', type)
 		$state.go('stats.' + type)
+	}
+
+	stats.fireGame = function(game) {
+		stats.loadGame(game._id) // double-check implementation
+		$state.go('stats.game')
 	}
 
 	stats.load = function(id, group, type) {

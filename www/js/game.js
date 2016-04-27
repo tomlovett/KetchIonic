@@ -27,10 +27,6 @@ angular.module('Ketch')
 
 	initController()
 
-	// var refreshGame = function() {
-	// 	gm.game = models.pullGame()
-	// }
-
 	// Game Flow
 	gm.doneSubs = function() {
 		models.line(gm.field)

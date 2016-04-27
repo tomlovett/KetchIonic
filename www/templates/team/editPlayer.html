@@ -1,7 +1,7 @@
 <ion-view>
   <ion-content>
-    <form>
-    <!-- <form ng-submit="mgmt.submitPlayer()"> -->
+    <!-- <form> -->
+    <form ng-submit="mgmt.submitPlayer()">
       <div class="list">
         <label class="item item-input">
           <span class="input-label">First Name*</span>
@@ -13,11 +13,14 @@
         </label>
         <label class="item item-input">
           <span class="input-label">Handle</span>
-          <input type="text" ng-model="mgmt.player.handles[0]">
+          <input type="text" ng-model="mgmt.player.handle">
         </label>
-        <label class="item item-input">
-          <span class="input-label">Gender</span>
-          <input type="text" ng-model="mgmt.player.gender">
+        <label class="item item-input item-select">
+          <div class="input-label">Frisbee Gender</div>
+          <select ng-model="mgmt.player.gender">
+            <option>m</option>
+            <option>f</option>
+          </select>
         </label>        
         <!-- gender -->
 
@@ -35,11 +38,11 @@
         </div>
 
         <label class="item">
-          <button class="button button-block button-positive" type="submit" ng-click="mgmt.submitPlayer()">Done</button>
-          <!-- <button class="button button-block button-positive" type="submit" ng-click="mgmt.submitPlayer('false')">And Another One</button> -->
+          <button class="button button-block button-positive" type="submit" ng>Done</button>
         </label>
 
       </div>
     </form>
   </ion-content>
 </ion-view>
+<!--  -->

@@ -12,5 +12,5 @@ Purple			#7E44BC
 White 			#FFFFFF (black)
 Brown			#943F07
 Black 			#000000
-Grey			#808080 (white)
+Grey			#808080
 Hot Pink		#F863CB

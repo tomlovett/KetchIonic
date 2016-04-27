@@ -6,13 +6,51 @@
                     <span class="input-label">Team Name*</span>
                     <input type="text" autofocus="true" ng-model="mgmt.team.name">
                 </label>
-                    <label class="item item-input">
+
+                <label class="item item-input">
                     <span class="input-label">Abbreviation (max 8 chars.)</span>
                     <input type="text" maxlength="8" ng-model="mgmt.team.short">
                 </label>
                 <p>i.e.: "Stack to the Future" -> "Stack" or "SttF"</p>
-                <!-- main color -->
-                <!-- secondary -->
+                
+                <label class="item item-input item-select">
+                  <div class="input-label">Main Team Color</div>
+                  <select ng-model="mgmt.team.primary">
+                    <option value="black" selected>Black</option>
+                    <option value="grey">Grey</option>
+                    <option value="white">White</option>
+                    <option value="red">Red</option>
+                    <option value="orange">Orange</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="light-green">Light Green</option>
+                    <option value="green">Green</option>
+                    <option value="light-blue">Light Blue</option>
+                    <option value="blue">Blue</option>
+                    <option value="purple">Purple</option>
+                    <option value="hot-pink">Hot Pink</option>
+                    <option value="brown">Brown</option>
+                  </select>
+                </label>
+                
+                <label class="item item-input item-select">
+                  <div class="input-label">Second Team Color</div>
+                  <select ng-model="mgmt.team.secondary">
+                    <option value="black" class="black">Black</option>
+                    <option value="grey">Grey</option>
+                    <option value="white" selected>White</option>
+                    <option value="red">Red</option>
+                    <option value="orange">Orange</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="light-green">Light Green</option>
+                    <option value="green">Green</option>
+                    <option value="light-blue">Light Blue</option>
+                    <option value="blue">Blue</option>
+                    <option value="purple">Purple</option>
+                    <option value="hot-pink">Hot Pink</option>
+                    <option value="brown">Brown</option>
+                  </select>
+                </label>  
+
                 <label class="item">
                     <button class="button button-block button-positive" type="submit">Done</button>
                 </label>
