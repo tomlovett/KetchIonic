@@ -3,16 +3,16 @@
 
 	<div class="row">
 		<div class="col">
-			<h2>Your Teams</h2>
+			<h2 style="text-align: center;">Your Teams</h2>
 		</div>
-		<div class="col col-30">
-			<button class="button button-balanced" ng-click="mgmt.manageTeam()">+Team</button>
-		</div>
+
 	</div>
 	
+	<li><a ui-sref="team.allPlayers">All Players</a></li>
 	<ul class="list">
-		<li><a ui-sref="team.allPlayers">All Players</a></li>
-		<li class="item" ng-repeat="(id, team) in mgmt.models.teams" ng-click="mgmt.focusTeam(team)">
+		<li class="item" ng-click="mgmt.manageTeam()" style="text-align: center;">New Team</li>
+		<!-- <br> -->
+		<li class="item {{team.primary}}" ng-repeat="(id, team) in mgmt.models.teams | orderBy: 'name'" ng-click="mgmt.focusTeam(team)">
 			{{team.name}}
 		</li>
 	</ul>

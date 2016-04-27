@@ -127,6 +127,14 @@ angular.module('Ketch').factory('models', function(server) {
 			})
 	}
 
+	m.undoPoint = function() {
+		server.undoPoint(m.game)
+			.success(function(res) {
+				console.log('undoPoint -> res.game: ', res.game)
+				m.game = res.game
+			})
+	}
+
 	m.stat = function(player, stat) {
 		m.point.stats[stat] = player
 	}

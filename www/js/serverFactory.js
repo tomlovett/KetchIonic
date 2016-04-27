@@ -63,6 +63,10 @@ angular.module('Ketch').factory('server', function($http) {
 		return $http.put(addr + '/api/game', game)
 	}
 
+	srv.undoPoint = function(game) {
+		return $http.get(addr + '/api/game/undoPoint/' + game._id)
+	}
+
 	// Stats
 	srv.loadStats = function(id, group, type) {
 		// group = (team || player), type = (games || points)

@@ -1,42 +1,51 @@
 <div>
 
 	<div class="row">
-    <div class="col col-33">
-      <h3 ng-click="gm.recordScore(1)">We Scored!</h3>
+    <!-- <div class="col col-33"> -->
+    <div class="col">
+      <h4 ng-click="gm.recordScore(1)" class="game my-button {{gm.models.gameTeam.primary}}">We Scored!</h4>
     </div>
-    <div class="col col-33 col-offset-33">
-      <h3 ng-click="gm.recordScore(0)">They Scored...</h3>
+    <div class="col-20"></div>
+    <!-- <div class="col col-33 col-offset-33"> -->
+    <div class="col">
+      <h4 ng-click="gm.recordScore(0)" class="game my-button white">They Scored...</h4>
     </div> 
   </div>
 
 	<div class="row">
 		<div class="col col-50">
-			<h5>Stats</h5>
+			<h5 class="game">Stats</h5>
 		</div>
 		<div class="col col-25 col-offset-20" style="text-align: right">
-			<h5>Field</h5>
+			<h5 class="game">Field</h5>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col col-50">
-			<p ng-click="gm.recordStat('throwaway')">Throwaway</p>
-			<p ng-click="gm.recordStat('drop')">Drop</p>
-			<p ng-click="gm.recordStat('D')">D</p>
-			<p ng-click="gm.recordStat('goldStar')">Gold Star</p>
+			<div style="width: 70%">
+			<p class="my-button red" ng-click="gm.recordStat('throwaway')">Throwaway</p>
+			<p class="my-button red" ng-click="gm.recordStat('drop')">Drop</p>
+			<p class="my-button green" ng-click="gm.recordStat('D')">D</p>
+			<p class="my-button yellow" ng-click="gm.recordStat('goldStar')">Gold Star!!</p>
+			<!-- <i class="ion ion-star"></i>  -->
+			</div>
 		</div>
 
-    <div class="col col-25 col-offset-20">
-      <p 
-        ng-repeat="player in gm.field | filter: {gender: 'f'} | orderBy: 'handle'"
-        ng-click="gm.recordStat(player)"
-        class="player {{gm.models.gameTeam.primary}}">
-        {{player.handle || player.first}}
-      </p>
-      <p 
-        ng-repeat="player in gm.field | filter: {gender: 'm'} | orderBy: 'handle'"
-        ng-click="gm.recordStat(player)"
-        class="player {{gm.models.gameTeam.secondary}}">
-        {{player.handle || player.first}}
-      </p>		</div>
-	</div>	
+	    <div class="col col-25 col-offset-20">
+			<p 
+				ng-repeat="player in gm.field | filter: {gender: 'f'} | orderBy: 'handle'"
+				ng-click="gm.recordStat(player)"
+				class="player {{gm.models.gameTeam.primary}}">
+				{{player.handle || player.first}}
+			</p>
+			<p 
+				ng-repeat="player in gm.field | filter: {gender: 'm'} | orderBy: 'handle'"
+				ng-click="gm.recordStat(player)"
+				class="player {{gm.models.gameTeam.secondary}}">
+				{{player.handle || player.first}}
+			</p>
+		</div>
+	</div>
+	<p ng-click="gm.goBack()">Oops, go back!</p>
+	<!-- could be ui-sref, but this is fine -->
 </div>

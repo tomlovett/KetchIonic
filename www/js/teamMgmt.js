@@ -26,7 +26,6 @@ angular.module('Ketch')
 		models.loadRoster(team)
 		models.gameTeam = team
 		mgmt.team       = team
-		console.log('mgmt.team: ', mgmt.team)
 		$state.go('team.oneTeam')
 	}
 
@@ -36,7 +35,6 @@ angular.module('Ketch')
 	}
 
 	mgmt.submitTeam = function() {
-		console.log('submitTeam -> mgmt.team: ', mgmt.team)
 		if (!mgmt.team._id) models.createTeam(mgmt.team)
 		else				models.updateTeam(mgmt.team)
 		$state.go('team.yourTeams')

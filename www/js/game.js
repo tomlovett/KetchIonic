@@ -31,11 +31,13 @@ angular.module('Ketch')
 	gm.doneSubs = function() {
 		models.line(gm.field)
 		$state.go('game.inPlay')
+		// set timer on showing "goBack"
 	}
 
 	gm.recordScore = function(result) {
 		models.recordScore(result)
 		$state.go('game.subs')
+		// set timer on showing "undoScore"
 	}
 
 	gm.recordStat = function(clicked) {
@@ -64,6 +66,16 @@ angular.module('Ketch')
 		while (gm.field.length > 0) {
 			gm.move(gm.field[0], gm.field, gm.bench)
 		}
+	}
+
+	// Oops!
+	gm.goBack = function() {
+		$state.go('game.subs')
+	}
+
+	gm.undoScore = function() {
+		models.undoPoint()
+		$state.go('game.inPlay')
 	}
 
 	// gm.closeGame = function() {

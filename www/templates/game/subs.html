@@ -1,20 +1,20 @@
 <div>
 
   <div class="row">
-    <div class="col col-33 col-offset-33">
-      <h3 ng-click="gm.doneSubs()">Done Subs</h3>
+    <div class="col col-50 col-offset-25">
+      <h4 ng-click="gm.doneSubs()" class="game my-button white">Done Subs</h4>
     </div>
   </div>
 
   <div class="row">
     <div class="col col-25">
-      <h5>Men</h5>
+      <h5 class="game">Men</h5>
     </div>
     <div class="col col-25">
-      <h5>Women</h5>
+      <h5 class="game">Women</h5>
     </div>
     <div class="col col-25 col-offset-20" style="text-align: right">
-      <h5>Field</h5>
+      <h5 class="game">Field</h5>
     </div>
   </div>
 	<div class="row">
@@ -33,5 +33,6 @@
       <p ng-click="gm.clearLine()">Clear Line</p>
     </div>
 	</div>
+  <p ng-click="gm.undoScore()">Oops! Undo that point</p>
 
 </div>
