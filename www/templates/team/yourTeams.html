@@ -10,9 +10,9 @@
 	
 	<li><a ui-sref="team.allPlayers">All Players</a></li>
 	<ul class="list">
-		<li class="item" ng-click="mgmt.manageTeam()" style="text-align: center;">New Team</li>
+		<li class="item item-balanced" ng-click="mgmt.manageTeam()" style="text-align: center;">New Team</li>
 		<!-- <br> -->
-		<li class="item {{team.primary}}" ng-repeat="(id, team) in mgmt.models.teams | orderBy: 'name'" ng-click="mgmt.focusTeam(team)">
+		<li class="item" ng-repeat="(id, team) in mgmt.models.teams | orderBy: 'name'" ng-click="mgmt.focusTeam(team)">
 			{{team.name}}
 		</li>
 	</ul>

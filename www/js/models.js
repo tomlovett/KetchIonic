@@ -44,13 +44,16 @@ angular.module('Ketch').factory('models', function(server) {
 		server.roster(team._id)
 			.success(function(res) {
 				m.roster = res.roster
+				m.roster.forEach(function(player) {
+					m.players[player._id] = player
+				})
 			})
 	}
 
 	m.rosterMove = function(playerID, team) {
 		console.log('rosterMove')
 		var index = team.roster.indexOf(playerID)
-		if (index == -1) 	team.roster.push(playerID)
+		if (index === -1) 	team.roster.push(playerID)
 		else				team.roster.splice(index, 1)
 		m.updateTeam(team)
 	}
@@ -119,6 +122,7 @@ angular.module('Ketch').factory('models', function(server) {
 		if (result) { m.game.score[0] += 1 }
 		else		{ m.game.score[1] += 1 }
 		m.point.result = result
+		m.point.score  = m.game.score
 		m.game.points.push(m.point)
 		server.updateGame(m.game)
 			.success(function(res) {
@@ -130,7 +134,6 @@ angular.module('Ketch').factory('models', function(server) {
 	m.undoPoint = function() {
 		server.undoPoint(m.game)
 			.success(function(res) {
-				console.log('undoPoint -> res.game: ', res.game)
 				m.game = res.game
 			})
 	}

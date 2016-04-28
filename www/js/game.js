@@ -1,5 +1,5 @@
 angular.module('Ketch')
-.controller('gameCtrl', function(models, $state) {
+.controller('gameCtrl', function(models, $state, $timeout) {
 
 	var gm = this
 
@@ -9,6 +9,9 @@ angular.module('Ketch')
 
 	gm.player = null
 	gm.stat   = null
+
+	gm.oops = false
+	gm.back = null
 
 	gm.field = []
 	gm.bench = []
@@ -30,23 +33,25 @@ angular.module('Ketch')
 	// Game Flow
 	gm.doneSubs = function() {
 		models.line(gm.field)
+		gm.oops = true
 		$state.go('game.inPlay')
-		// set timer on showing "goBack"
+		$timeout(function() { gm.oops = false }, 7500)
 	}
 
 	gm.recordScore = function(result) {
 		models.recordScore(result)
+		gm.oops = true
 		$state.go('game.subs')
-		// set timer on showing "undoScore"
+		$timeout(function() { gm.oops = false }, 7500)
 	}
 
 	gm.recordStat = function(clicked) {
 		if (typeof clicked === 'string') { // stats pass string values
-			if (gm.stat)	{ gm.stat = null    }
-			else            { gm.stat = clicked }
+			if (gm.stat)	gm.stat = null    
+			else            gm.stat = clicked 
 		} else {						   // players pass player objects
-			if (gm.player)  { gm.player = null   	  }
-			else 			{ gm.player = clicked._id }
+			if (gm.player)  gm.player = null
+			else 			gm.player = clicked._id
 		}
 		if (gm.player && gm.stat) {
 			console.log('stat recorded!')
@@ -55,6 +60,9 @@ angular.module('Ketch')
 			gm.stat   = null			
 		}
 	}
+
+	// gm.closeGame = function() {
+	// }
 
 	// Substitutions
 	gm.move = function(player, from, to) {
@@ -68,6 +76,16 @@ angular.module('Ketch')
 		}
 	}
 
+	gm.scoreboard = function() {
+		if (gm.back) {
+			$state.go(gm.back)
+			gm.back = null
+		} else {
+			gm.back = $state.current
+			$state.go('game.scoreSummary')
+		}
+	}
+
 	// Oops!
 	gm.goBack = function() {
 		$state.go('game.subs')
@@ -77,16 +95,5 @@ angular.module('Ketch')
 		models.undoPoint()
 		$state.go('game.inPlay')
 	}
-
-	// gm.closeGame = function() {
-	// }
-
-	// gm.toScoreSummary = function() {
-	// 	$state.go('scoreSummary')
-	// }
-
-	// gm.backToGame = function() {
-	// 	$state.go('gm')
-	// }
 
 })

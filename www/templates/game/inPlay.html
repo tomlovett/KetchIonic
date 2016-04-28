@@ -32,20 +32,18 @@
 		</div>
 
 	    <div class="col col-25 col-offset-20">
-			<p 
-				ng-repeat="player in gm.field | filter: {gender: 'f'} | orderBy: 'handle'"
-				ng-click="gm.recordStat(player)"
-				class="player {{gm.models.gameTeam.primary}}">
-				{{player.handle || player.first}}
+			<p ng-repeat="player in gm.field | filter: {gender: 'f'} | orderBy: 'handle'"
+			ng-click="gm.recordStat(player)"
+			class="player {{gm.models.gameTeam.primary}}">
+			{{player.handle}}
 			</p>
-			<p 
-				ng-repeat="player in gm.field | filter: {gender: 'm'} | orderBy: 'handle'"
-				ng-click="gm.recordStat(player)"
-				class="player {{gm.models.gameTeam.secondary}}">
-				{{player.handle || player.first}}
+			<p ng-repeat="player in gm.field | filter: {gender: 'm'} | orderBy: 'handle'"
+			ng-click="gm.recordStat(player)"
+			class="player {{gm.models.gameTeam.secondary}}">
+			{{player.handle}}
 			</p>
 		</div>
 	</div>
-	<p ng-click="gm.goBack()">Oops, go back!</p>
+	<p class="my-button grey smooth-trans" ng-show="gm.oops" ng-click="gm.goBack()">Oops, go back!</p>
 	<!-- could be ui-sref, but this is fine -->
 </div>

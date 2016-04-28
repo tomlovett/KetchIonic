@@ -1,1 +1,15 @@
-scoreSummary.html
+<!-- <ion-view>
+	<ion-content class="game">
+ -->
+<div>
+	<ul class="list game">
+		<li ng-repeat="point in gm.models.game.points" class="item game">
+		<span style="font-size: 20px; font-weight: bold;" class="my-button" ng-class="{ {{gm.models.gameTeam.primary}}: point.result, white: !(point.result) }">{{point.score[0]}} - {{point.score[1]}}</span>
+		Line:<span ng-repeat="person in point.line">{{' ' + gm.models.players[person].handle}}</span>
+		<!-- Line : {{gm.processLine(point.line)}} -->
+		</li>
+		<li class="item" style="text-align: center;" ng-click="gm.scoreboard()"><span style="text-decoration: underline;">Back to the Game</span></li>
+	</ul>
+</div>
+<!-- 	</ion-content>
+</ion-view> -->
