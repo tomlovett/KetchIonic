@@ -110,11 +110,18 @@ angular.module('Ketch').factory('models', function(server) {
 	}
 
 // Game \\
-	m.initGame = function(gameObj) {
-		m.gameTeam = m.team(gameObj.teams[0])
-		server.newGame(gameObj)
+	m.initGame = function() {
+		server.newGame({ team: m.gameTeam})
 			.success(function(res) {
 				m.game = res.game
+			})
+	}
+
+	m.closeGame = function() {
+		server.closeGame(m.game)
+			.success(function(res) {
+				console.log('yayyy...')
+				m.game = null
 			})
 	}
 

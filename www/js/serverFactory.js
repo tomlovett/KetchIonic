@@ -55,8 +55,8 @@ angular.module('Ketch').factory('server', function($http) {
 		return $http.get(addr + '/api/game/' + gameID)
 	}
 
-	srv.newGame = function(game) {
-		return $http.post(addr + '/api/game', game)
+	srv.newGame = function(team) {
+		return $http.post(addr + '/api/game', team)
 	}
 
 	srv.updateGame = function(game) {
@@ -65,6 +65,10 @@ angular.module('Ketch').factory('server', function($http) {
 
 	srv.undoPoint = function(game) {
 		return $http.get(addr + '/api/game/undoPoint/' + game._id)
+	}
+
+	srv.closeGame = function(game) {
+		return $http.get(addr + '/api/game/close/' + game._id)
 	}
 
 	// Stats

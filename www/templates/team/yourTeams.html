@@ -8,13 +8,13 @@
 
 	</div>
 	
-	<li><a ui-sref="team.allPlayers">All Players</a></li>
 	<ul class="list">
-		<li class="item item-balanced" ng-click="mgmt.manageTeam()" style="text-align: center;">New Team</li>
 		<!-- <br> -->
 		<li class="item" ng-repeat="(id, team) in mgmt.models.teams | orderBy: 'name'" ng-click="mgmt.focusTeam(team)">
 			{{team.name}}
 		</li>
+		<li class="item" ui-sref="team.allPlayers" style="text-align: center;">All Players</li>
+		<li class="item item-balanced" ng-click="mgmt.manageTeam()" style="text-align: center;">New Team</li>
 	</ul>
 
 	</ion-content>

@@ -23,6 +23,11 @@
 	transition: all 1s ease-in-ease-out 1s;
 }
 
+.item-scroll {
+	overflow: scroll;
+	text-overflow: initial;
+}
+
 /* Team color schemes */
 .red {
 	background-color: #C91111;

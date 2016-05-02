@@ -19,13 +19,7 @@ angular.module('Ketch')
 
 	var initController = function() {
 		gm.bench = models.roster
-		gm.game = {
-			teams  : [models.gameTeam._id],
-			score  : [0, 0],
-			points : [],
-			rosters: []
-		}
-		models.initGame(gm.game)
+		models.initGame()
 	}
 
 	initController()
@@ -61,8 +55,11 @@ angular.module('Ketch')
 		}
 	}
 
-	// gm.closeGame = function() {
-	// }
+	gm.closeGame = function() {
+		models.closeGame()
+		$state.go('team.yourTeams')
+		// or stats or some shit
+	}
 
 	// Substitutions
 	gm.move = function(player, from, to) {
