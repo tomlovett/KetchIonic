@@ -1,21 +1,12 @@
-<ion-view>
-	<ion-content>
-
+<div>
 	<!-- upper block: Us vs. Them, score, [date] -->
+	<h3>{{
+	stats.card.teams[0].name + ' vs. ' + {{stats.card.teams[1].name
+	 + '    ' +
+	stats.card.score[0] + ' - ' + stats.card.score[1]}}</h3>
 
-	<h4>{{mgmt.models.team(stats.team).name}}</h4>
-	<p>stats.team: {{stats.team}}</p>
+	<!-- scoreSummary, playerPeformance -->
 
+	<ui-view></ui-view>
 
-	<ul class="list">
-		<li class="list-item" ng-repeat="playerID in stats.game.roster">
-			{{stats.models.player(playerID).handle}}
-			Points: {{stats.total[playerID]}}
-			+/-: {{stats.plusMinus[playerID]}}
-		</li>
-	</ul>
-
-	<p>stats.game.roster: {{stats.game.roster}}</p>
-
-	</ion-content>
-</ion-view>
+</div>

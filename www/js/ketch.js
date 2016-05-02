@@ -83,25 +83,20 @@ angular.module('Ketch', [
 	
 	.state('stats', {
 		url         : '/stats',
-		abstract	: true,
 		controller	: 'statsCtrl as stats',
-		template 	: '<ion-nav-view></ion-nav-view>',
+		template 	: '/templates/stats/header.html',
 	})
-	.state('stats.home', {
-		url         : '/home',
-		templateUrl : '/templates/stats/home.html'
+	.state('stats.team', {
+		url         : '/team',
+		templateUrl : '/templates/stats/team.html'
 	})
 	.state('stats.game', {
 		url         : '/game',
 		templateUrl : '/templates/stats/game.html'
 	})
-	.state('stats.games', {
-		url         : '/games',
-		templateUrl : '/templates/stats/games.html'
-	})
-	.state('stats.points', {
-		url         : '/points',
-		templateUrl : '/templates/stats/points.html'
+	.state('stats.player', {
+		url         : '/player',
+		templateUrl : '/templates/stats/player.html'
 	})
 
 	// ratings
