@@ -8,19 +8,26 @@ angular.module('Ketch')
 	stats.card   = null
 	stats.detail = null
 
-	stats.history = []
+	// stats.history = []
 
-	var gameCard = function() {
+	var setHeader = function() {
+		stats.header = stats.card
+		stats.header.text
+		stats.header.bgColor
+	}
+
+	stats.gameCard = function() {
+		// load game, assign to stats.card
 		// populate teams
 			// rosters, too?
 	}
 
-	var playerCard = function() {
+	stats.playerCard = function() {
 		// load games, points.length, plusMinus
 		// playerTeams populated
 	}
 
-	var teamCard = function() {
+	stats.teamCard = function() {
 		// record, roster
 	}
 

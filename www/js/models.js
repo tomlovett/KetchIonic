@@ -121,6 +121,7 @@ angular.module('Ketch').factory('models', function(server) {
 		server.closeGame(m.game)
 			.success(function(res) {
 				console.log('yayyy...')
+				console.log('closeGame -> res: ', res)
 				m.game = null
 			})
 	}
@@ -134,6 +135,7 @@ angular.module('Ketch').factory('models', function(server) {
 		server.updateGame(m.game)
 			.success(function(res) {
 				m.game = res.game
+				console.log('models.recordScore -> res.game: ', res.game)
 				m.point = { line: [], stats: {} }
 			})
 	}

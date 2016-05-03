@@ -59,6 +59,10 @@ angular.module('Ketch').factory('server', function($http) {
 		return $http.post(addr + '/api/game', team)
 	}
 
+	srv.point = function(game, point) {
+		return $http.put(addr + '/api/game/point/' + game._id, point)
+	}
+
 	srv.updateGame = function(game) {
 		return $http.put(addr + '/api/game', game)
 	}
