@@ -1,11 +1,11 @@
 <ion-view>
 	<ion-content>
-		<div class="row" style="text-align: center">
+		<div class="row centered">
 			<h3 class="col my-button {{mgmt.models.gameTeam.primary}}">{{mgmt.team.name}}</h3>
 		</div>
 
-		<div class="row" style="text-align: center; text-decoration: underline;">
-			<div class="col" ui-sref="stats.home">Stats</div>
+		<div class="row centered underline">
+			<div class="col" ui-sref="stats.team({teamID: mgmt.team._id})">Stats</div>
 			<div class="col" ng-click="mgmt.manageTeam(mgmt.team)" ui-sref="team.editTeam">Edit Team</div>
 			<div class="col" ng-click="mgmt.initGame()">Start Game</div>
 		</div>
@@ -18,7 +18,7 @@
 	         		player.handle
 		        }}
 			</li>
-			<li class="item item-balanced" ng-click="mgmt.managePlayer({})" style="text-align: center;">New Player</li>
+			<li class="item item-balanced centered" ng-click="mgmt.managePlayer({})">New Player</li>
 		</ul>
 
 		<!-- add player by email; (big email format) -->

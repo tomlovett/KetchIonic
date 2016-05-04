@@ -4,12 +4,8 @@ angular.module('Ketch').factory('server', function($http) {
 
 	var srv = {}
 
-	// srv.me = function() {
-	// 	return $http.get(addr + '/api/player')
-	// }
-
 	srv.myTeams = function() {
-		return $http.get(addr + '/api/team/playerTeams')
+		return $http.get(addr + '/api/team/myTeams')
 	}
 
 	srv.roster = function(teamID) {
@@ -76,45 +72,29 @@ angular.module('Ketch').factory('server', function($http) {
 	}
 
 	// Stats
-	srv.loadStats = function(id, group, type) {
-		// group = (team || player), type = (games || points)
-		var route = '/api/stats/' + group + '/' + type + '/' + id
-		return $http.get(addr + route)
+
+	srv.playerTeams = function(playerID) {
+		return $http.get(addr + '/api/team/playerTeams/' + playerID)
 	}
 
-	srv.gameStats = function(id) {
-		return $http.get(addr + '/api/stats/game/' + id)
+	srv.teamGames = function(teamID) {
+		return $http.get(addr + '/api/stats/team/games/' + teamID)		
 	}
 
-	// srv.teamGames = function(teamID) {
-	// 	return $http.get(addr + '/api/stats/team/games/' + teamID)		
-	// }
-
-	// srv.teamPoints = function(teamID) {
-	// 	return $http.get(addr + '/api/stats/team/points/' + teamID)		
-	// }
-
-	// srv.playerGames = function(playerID) {
-	// 	return $http.get(addr + '/api/stats/player/games/' + playerID)		
-	// }
-
-	// srv.playerPoints = function(playerID) {
-	// 	return $http.get(addr + '/api/stats/player/points/' + playerID)		
-	// }
-
-	srv.gamesWith = function(teamID, playerID) {
-		var route = '/api/stats/gamesWith/' + teamID + '/' + playerID
-		return $http.get(addr + route)		
+	srv.playerGames = function(playerID) {
+		return $http.get(addr + '/api/stats/player/games/' + playerID)		
 	}
 
-	srv.pointsWith = function(teamID, playerID) {
-		var route = '/api/stats/pointsWith/' + teamID + '/' + playerID
-		return $http.get(addr + route)		
+	srv.playerPerf = function(playerID) {
+		return $http.get(addr + '/api/stats/player/performance/' + playerID)		
 	}
 
-	srv.friends = function(playerA, playerB) {
-		var route = '/api/stats/friends/' + playerA + '/' + playerB
-		return $http.get(addr + route)
+	srv.teamPerf = function(team) {
+		return $http.post(addr + '/api/stats/team/performance/' + team._id, team.roster)		
+	}
+
+	srv.gamePerf = function(gameID) {
+		return $http.get(addr + '/api/stats/game/performance/' + gameID)				
 	}
 
 	return srv

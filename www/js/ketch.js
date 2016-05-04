@@ -55,7 +55,7 @@ angular.module('Ketch', [
 		url         : '/team',
 		abstract    : true,
 		// templateUrl : '/templates/menu.html',
-		template: '<ion-nav-view></ion-nav-view>',
+		template    : '<ion-nav-view></ion-nav-view>',
 		controller  : 'teamMgmt as mgmt'
 	})
 	.state('team.yourTeams', {
@@ -78,27 +78,48 @@ angular.module('Ketch', [
 		url         : '/allPlayers',
 		templateUrl : '/templates/team/allPlayers.html'
 	})
-
-	// url: ..., views: { 'mainContent' : {templateUrl: ... } }
-	
+	// Stats
 	.state('stats', {
 		url         : '/stats',
 		controller	: 'statsCtrl as stats',
-		template 	: '/templates/stats/header.html',
+		templateUrl	: '/templates/stats/header.html',
 	})
 	.state('stats.team', {
-		url         : '/team',
+		url         : '/team/:teamID',
 		templateUrl : '/templates/stats/team.html'
 	})
+		.state('stats.team.gameHistory', {
+		url         : '/team/:teamID/gameHistory',
+		templateUrl : '/templates/stats/team.gameHistory.html'
+		})
+		.state('stats.team.teamPerf', {
+		url         : '/team/:teamID/teamPerf',
+		templateUrl : '/templates/stats/team.team.perf.html'
+		})
 	.state('stats.game', {
-		url         : '/game',
+		url         : '/game/:gameID',
 		templateUrl : '/templates/stats/game.html'
 	})
+		.state('stats.game.perf', {
+			url         : '/game/:gameID/perf',
+			templateUrl : '/templates/stats/game.perf.html'
+		})
+		.state('stats.game.scoreSummary', {
+			url         : '/game/:gameID/scoreSummary',
+			templateUrl : '/templates/stats/game.scoreSummary.html'
+		})
 	.state('stats.player', {
-		url         : '/player',
+		url         : '/player/:playerID',
 		templateUrl : '/templates/stats/player.html'
 	})
+		.state('stats.player.games', {
+			url         : '/player/:playerID/games',
+			templateUrl : '/templates/stats/player.games.html'
+		})
+		.state('stats.player.points', {
+			url         : '/player/:playerID/points',
+			templateUrl : '/templates/stats/player.points.html'
+		})
 
-	// ratings
 	$urlRouterProvider.otherwise('/login')
 })

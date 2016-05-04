@@ -1,0 +1,13 @@
+<div>
+	<ul class="list">
+		<li ng-repeat="point stats.card.points" class="item item-scroll">
+		<!-- <span style="font-size: 20px; font-weight: bold;" class="my-button" ng-class="{ {{gm.models.gameTeam.primary}}: point.result, white: !(point.result) }"> -->
+		{{point.score[0]}} - {{point.score[1]}}
+
+
+		<!-- loading players for this section -->
+		<span ng-repeat="person in point.line | orderBy: ['-gender', 'handle']">{{' ' + stats.models.players[person].handle}},</span>
+		<!-- $last and the comma; prefer to have girls first -->
+		</li>
+	</ul>
+</div>

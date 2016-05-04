@@ -120,7 +120,6 @@ angular.module('Ketch').factory('models', function(server) {
 	m.closeGame = function() {
 		server.closeGame(m.game)
 			.success(function(res) {
-				console.log('yayyy...')
 				console.log('closeGame -> res: ', res)
 				m.game = null
 			})

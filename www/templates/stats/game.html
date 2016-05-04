@@ -1,9 +1,10 @@
 <div>
 	<!-- upper block: Us vs. Them, score, [date] -->
 	<h3>{{
-	stats.card.teams[0].name + ' vs. ' + {{stats.card.teams[1].name
+	stats.card.teams[0].name + ' vs. ' + (stats.card.teams[1].name || 'THEM')
 	 + '    ' +
-	stats.card.score[0] + ' - ' + stats.card.score[1]}}</h3>
+	stats.card.score[0] + ' - ' + stats.card.score[1]
+	}}</h3>
 
 	<!-- scoreSummary, playerPeformance -->
 

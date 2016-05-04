@@ -1,0 +1,10 @@
+<div>
+
+	<ul class="list">
+		<li ng-repeat="game in stats.card.games" ng-click="stats.gameCard(game._id)" class="item item-scroll">
+ 		{{game.score[0] + '-' + game.score[1] +  ' ' +
+		stats.models.teams[game.teams[0]]['name'] + ' vs. ' + (game.teams[1].name || 'THEM') }}
+		</li>
+	</ul>
+
+</div>

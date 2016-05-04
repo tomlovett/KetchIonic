@@ -1,0 +1,11 @@
+<div>
+
+<!-- stats section? -->
+
+	<ul class="list">
+		<li ng-repeat="(id, perf) in stats.card.perf" ng-click="stats.playerCard(id)" class="item item-scroll">
+ 		Player Name  Points: {{perf.points}} +/-: {{perf['+/-']}}
+		</li>
+	</ul>
+
+</div>

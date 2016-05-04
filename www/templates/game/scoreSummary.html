@@ -6,6 +6,6 @@
 		<span ng-repeat="person in point.line | orderBy: ['-gender', 'handle']">{{' ' + gm.models.players[person].handle}},</span>
 		<!-- $last and the comma; prefer to have girls first -->
 		</li>
-		<li class="item" style="text-align: center;" ng-click="gm.scoreboard()"><span style="text-decoration: underline;">Back to the Game</span></li>
+		<li class="item centered" ng-click="gm.scoreboard()"><span class="underline">Back to the Game</span></li>
 	</ul>
 </div>

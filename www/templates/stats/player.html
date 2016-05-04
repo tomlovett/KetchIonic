@@ -1,11 +1,11 @@
 <div>
 
-	<h3>{{stats.card.first}}</h3>
+	<h3>{{ stats.playerName(stats.card) }}</h3>
 	<!-- formatting player name -> handle/not -->
 
-	<h5><span ng-repeat="team in stats.card.teams" class="{{team.primary}}">{{team.name + ' '}}</span></h5>
+	<h5><span ng-repeat="team in stats.card.teams" class="player {{team.primary}}">{{team.name + ' '}}</span></h5>
 
-	<h5>Games: {{stats.card.games.length}} Points: {{stats.card.points.length}} +/-: {{stats.card.plusMinus}}</h5>
+	<h5>Games: {{stats.card.games.length}} Points: {{stats.card.points.length}} +/-: {{stats.card['+/-']}}</h5>
 
 	<!-- games, points -->
 

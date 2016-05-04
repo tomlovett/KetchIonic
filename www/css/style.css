@@ -28,6 +28,14 @@
 	text-overflow: initial;
 }
 
+.centered {
+	text-align: center;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
 /* Team color schemes */
 .red {
 	background-color: #C91111;
