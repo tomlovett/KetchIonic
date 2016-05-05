@@ -27,9 +27,26 @@ angular.module('Ketch')
 		server.game(id)
 			.success(function(res) {
 				stats.card = res.game
-				stats.card.teams[0] = models.team(res.teams[0])
-				if (res.teams[1]) 
-					stats.card.teams[1] = models.team(res.teams[1])
+				server.team(stats.card.teams[0])
+					.success(function(res) {
+						stats.card.teams[0] = res.team
+						res.team.roster.forEach(function(player) {
+							models.player(player)
+						})
+					})
+				if (stats.card.teams[1]) {
+					server.team(stats.card.teams[1])
+						.success(function(res) {
+							stats.card.teams[1] = res.team
+							res.team.roster.forEach(function(player) {
+								models.player(player)
+							})
+						})
+				}
+				server.gamePerf(id)
+					.success(function(res) {
+						stats.card.perf = res.perf
+					})
 			})
 		// views: scoreSummary, playerPerformance
 	}
@@ -40,16 +57,21 @@ angular.module('Ketch')
 		server.player(id)
 			.success(function(res) {
 				stats.card = res.player
-				server.playerTeams(playerID)
+				server.playerTeams(id)
 					.success(function(res) {
-						stats.card.teams = res
+						stats.card.teams = res.teams
 					})
-				server.playerPerf(playerID)
+				server.playerPerf(id)
 					.success(function(res) {
-						stats.card.games  = res.games
+						stats.card.perf = {}
+						stats.card.perf.games  = res.perf.games
 						// load all teams for games
-						stats.card.points = res.points
-						stats.card['+/-'] = res['+/-']
+						stats.card.perf.points = res.perf.points
+						stats.card.perf['+/-'] = res.perf['+/-']
+					})
+				server.playerGames(id)
+					.success(function(res) {
+						stats.card.games = res.games
 					})
 			})
 		// [name] teams, career stats
@@ -70,8 +92,8 @@ angular.module('Ketch')
 					})
 				server.teamPerf(res.team)
 					.success(function(res) {
-						console.log('teamPerf: ', res.perf)
 						stats.card.teamPerf = res.perf
+						// _id's -> playerObj
 					})
 			})
 		// views: gameHistory, playerPerf

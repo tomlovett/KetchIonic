@@ -19,7 +19,7 @@ angular.module('Ketch')
 
 	var initController = function() {
 		gm.bench = models.roster
-		models.initGame()
+		if (!models.game)		models.initGame()
 	}
 
 	initController()

@@ -94,7 +94,7 @@ angular.module('Ketch', [
 		})
 		.state('stats.team.teamPerf', {
 		url         : '/team/:teamID/teamPerf',
-		templateUrl : '/templates/stats/team.team.perf.html'
+		templateUrl : '/templates/stats/team.perf.html'
 		})
 	.state('stats.game', {
 		url         : '/game/:gameID',
