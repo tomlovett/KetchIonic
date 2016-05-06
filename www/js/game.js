@@ -21,6 +21,8 @@ angular.module('Ketch')
 		gm.bench = models.roster
 		if (!models.game)		models.initGame()
 	}
+	// game inits the first time, but not subsequent times
+	// need to restructure how games are initiated
 
 	initController()
 
@@ -74,18 +76,20 @@ angular.module('Ketch')
 	}
 
 	gm.scoreboard = function() {
-		if (gm.back) {
+		if (gm.back) { 
 			$state.go(gm.back)
 			gm.back = null
 		} else {
 			gm.back = $state.current
 			$state.go('game.scoreSummary')
 		}
+	/* scoreSummary can be fired from "subs" or "inPlay"; "gm.back" stored
+	so user can be routed back to proper screen*/
 	}
 
 	// Oops!
 	gm.goBack = function() {
-		$state.go('game.subs')
+		$state.go('game.subs') // change to ui-sref in html
 	}
 
 	gm.undoScore = function() {

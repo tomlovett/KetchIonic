@@ -19,31 +19,31 @@ angular.module('Ketch')
 	initController()
 
 	mgmt.initGame = function() {
-		$state.go('game.subs')
+		$state.go('game.subs') // change to ui-sref
 	}
 
 	mgmt.focusTeam = function(team) {
 		models.loadRoster(team)
 		models.gameTeam = team
 		mgmt.team       = team
-		$state.go('team.oneTeam')
+		$state.go('team.oneTeam') // can re-work to paramaterized route
 	}
 
 	mgmt.manageTeam = function(team) {
 		if (!team) 		mgmt.team = {}
-		$state.go('team.editTeam')
+		$state.go('team.editTeam') // parameterize
 	}
 
 	mgmt.submitTeam = function() {
 		if (!mgmt.team._id) models.createTeam(mgmt.team)
 		else				models.updateTeam(mgmt.team)
-		$state.go('team.yourTeams')
+		$state.go('team.yourTeams') // parameterize
 	}
 	
 	mgmt.managePlayer = function(player) {
 		mgmt.player = player || {}
 		loadRosterStatus(player)
-		$state.go('team.editPlayer')
+		$state.go('team.editPlayer') // parameterize
 	}
 
 	mgmt.submitPlayer = function() {

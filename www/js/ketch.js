@@ -24,6 +24,7 @@ angular.module('Ketch', [
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
+// move all this to a separate file
 
 	$stateProvider	
 	// Login

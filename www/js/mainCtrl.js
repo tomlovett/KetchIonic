@@ -5,6 +5,10 @@ angular.module('Ketch')
 
 	var main = this
 
+	// Yikes. This was one of the first-built modules and not worked on much.
+	// Form validation pretty yucky and not super effective.
+	
+
 	main.signingUp = false
 	main.loginData = {}
 	main.loginData.gender = 'm'

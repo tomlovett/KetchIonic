@@ -4,6 +4,20 @@ angular.module('Ketch')
 	var stats = this
 	console.log('statsCtrl')
 
+	/* 
+	This is the most recently-built module. 
+	It will be cut down and potentially modularized. 
+	With more work-hours I'll figure out how I want to accomplish that.
+	In the meantime, I apologize to anybody who tries to read this.
+	*/
+
+	/*
+	There are massive chained functions to load relevant data for each view.
+	The goal is to make detail views instantaneous.
+	So after the main data is loaded (the player, team or game) the sub-data is
+		populated and the sub-views pre-staged.
+	*/
+
 	stats.header = null  // text, bg-color
 	stats.card   = null
 	stats.detail = null
@@ -12,7 +26,7 @@ angular.module('Ketch')
 	stats.serv   = statServ
 	stats.models = models
 
-	// stats.history = []
+	// stats.history = [] // part of the later-stage concept for stat view
 
 	var setHeader = function() {
 		stats.header = stats.card || null
@@ -24,9 +38,13 @@ angular.module('Ketch')
 	stats.gameCard = function(id) {
 		$state.go('stats.game', {gameID: id})
 		setHeader()
-		server.game(id)
+		server.game(id) // abstract this loading function
 			.success(function(res) {
 				stats.card = res.game
+				server.gamePerf(id)
+					.success(function(res) {
+						stats.card.perf = res.perf
+					})
 				server.team(stats.card.teams[0])
 					.success(function(res) {
 						stats.card.teams[0] = res.team
@@ -43,18 +61,13 @@ angular.module('Ketch')
 							})
 						})
 				}
-				server.gamePerf(id)
-					.success(function(res) {
-						stats.card.perf = res.perf
-					})
 			})
-		// views: scoreSummary, playerPerformance
 	}
 
 	stats.playerCard = function(id) {
 		$state.go('stats.player', {playerID: id})
 		setHeader()
-		server.player(id)
+		server.player(id) // abstract this loading function
 			.success(function(res) {
 				stats.card = res.player
 				server.playerTeams(id)
@@ -74,15 +87,13 @@ angular.module('Ketch')
 						stats.card.games = res.games
 					})
 			})
-		// [name] teams, career stats
-		// views: gameHistory, playerPerformance by gameHistory, pointHistory?
 	}
 
 	stats.teamCard = function(id) {
 		$state.go('stats.team', {teamID: id})
 		setHeader()
 		models.team(id)
-		server.team(id)
+		server.team(id) // abstract this loading function
 			.success(function(res) {
 				stats.card = res.team
 				server.teamGames(id)
@@ -95,9 +106,8 @@ angular.module('Ketch')
 						stats.card.teamPerf = res.perf
 						// _id's -> playerObj
 					})
-			})
-		// views: gameHistory, playerPerf
 			// run models.player() through roster
+			})
 	}
 
 	var initController = function() {
