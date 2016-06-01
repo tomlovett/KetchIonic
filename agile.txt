@@ -1,0 +1,14 @@
+Change Init Game
+	mid-screen: enter opponent name, start game
+	functions to re-work it
+
+Abstract front-end routing
+	verify how to abstract routing
+	abstract game routes
+	abstract team routes
+	abstract stats routes
+
+
+DEEP QUEUE-
+parameterize game routes
+parameterize team routes

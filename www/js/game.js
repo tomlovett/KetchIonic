@@ -10,6 +10,8 @@ angular.module('Ketch')
 	gm.player = null
 	gm.stat   = null
 
+	var stat = {}
+
 	gm.oops = false
 	gm.back = null
 
@@ -38,22 +40,25 @@ angular.module('Ketch')
 		models.recordScore(result)
 		gm.oops = true
 		$state.go('game.subs')
-		$timeout(function() { gm.oops = false }, 7500)
+		$timeout(function() { gm.oops = false }, 10000)
 	}
 
 	gm.recordStat = function(clicked) {
 		if (typeof clicked === 'string') { // stats pass string values
-			if (gm.stat)	gm.stat = null    
-			else            gm.stat = clicked 
+			if (stat.type)	  stat.type = null    
+			else              stat.type = clicked 
 		} else {						   // players pass player objects
-			if (gm.player)  gm.player = null
-			else 			gm.player = clicked._id
+			if (stat.player)  stat.player = null
+			else 			  stat.player = clicked._id
 		}
-		if (gm.player && gm.stat) {
+		checkStat()
+	}
+
+	var checkStat = function() {
+		if (stat.player && stat.type) {
 			console.log('stat recorded!')
-			models.stat(gm.player, gm.stat)
-			gm.player = null
-			gm.stat   = null			
+			models.stat(stat.player, stat.type)
+			stat = {}		
 		}
 	}
 
@@ -61,10 +66,11 @@ angular.module('Ketch')
 		models.closeGame()
 		$state.go('team.yourTeams')
 		// or stats or some shit
+		// confirm, route to stats recap
 	}
 
 	// Substitutions
-	gm.move = function(player, from, to) {
+	gm.move = function(player, from, to) {  // "from" and "to" are bench/field
 		var index = from.indexOf(player)
 		to.push(from.splice(index, 1)[0])
 	}
@@ -80,11 +86,9 @@ angular.module('Ketch')
 			$state.go(gm.back)
 			gm.back = null
 		} else {
-			gm.back = $state.current
+			gm.back = $state.current  // "subs" or "inPlay"
 			$state.go('game.scoreSummary')
 		}
-	/* scoreSummary can be fired from "subs" or "inPlay"; "gm.back" stored
-	so user can be routed back to proper screen*/
 	}
 
 	// Oops!
