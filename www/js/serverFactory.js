@@ -72,7 +72,6 @@ angular.module('Ketch').factory('server', function($http) {
 	}
 
 	// Stats
-
 	srv.playerTeams = function(playerID) {
 		return $http.get(addr + '/api/team/playerTeams/' + playerID)
 	}

@@ -1,0 +1,21 @@
+<div>
+
+	<h3>New Game</h3>
+
+	<label class="item item-input">
+		<span class="input-label">Opponent Name:</span>
+		<input type="text" ng-model="gm.opponent">
+	</label>
+
+	<h4 class="centered">- OR -</h4>
+
+	<label class="item item-input">
+		<span class="input-label">Opponent Alias:</span>
+		<input type="text" ng-model="gm.alias">
+	</label>
+
+    <label>
+      <button class="button button-block button-positive" ng-click="gm.startGame()">Start Game!</button>
+    </label>
+
+</div>

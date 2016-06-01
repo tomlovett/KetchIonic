@@ -19,7 +19,7 @@ angular.module('Ketch')
 	initController()
 
 	mgmt.initGame = function() {
-		$state.go('game.subs') // change to ui-sref
+		$state.go('game.newGame') // change to ui-sref
 	}
 
 	mgmt.focusTeam = function(team) {

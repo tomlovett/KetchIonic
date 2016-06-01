@@ -110,8 +110,11 @@ angular.module('Ketch').factory('models', function(server) {
 	}
 
 // Game \\
-	m.initGame = function() {
-		server.newGame({ team: m.gameTeam})
+	m.initGame = function(alias, opponent) {
+		var gameObj = { team: m.gameTeam, misc: {} }
+		gameObj.misc['alias']    = alias
+		gameObj.misc['opponent'] = opponent
+		server.newGame(gameObj)
 			.success(function(res) {
 				m.game = res.game
 			})
@@ -145,8 +148,8 @@ angular.module('Ketch').factory('models', function(server) {
 			})
 	}
 
-	m.stat = function(player, stat) {
-		m.point.stats[stat] = player
+	m.markStat = function(statObj) {
+		m.point.stats[statObj.type] = statObj.player
 	}
 
 	m.line = function(line) {

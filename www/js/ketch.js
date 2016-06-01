@@ -38,6 +38,14 @@ angular.module('Ketch', [
 		url        : '/game',
 		controller : 'gameCtrl as gm',
 		templateUrl : '/templates/game/scoreboard.html',
+	})
+	.state('game.newGame', {
+		url         : '/newGame',
+		templateUrl : '/templates/game/newGame.html',
+	})
+	.state('game.closeGame', {
+		url         : '/closeGame',
+		templateUrl : '/templates/game/closeGame.html',
 	})	
 	.state('game.subs', {
 		url         : '/subs',
@@ -90,11 +98,11 @@ angular.module('Ketch', [
 		templateUrl : '/templates/stats/team.html'
 	})
 		.state('stats.team.gameHistory', {
-		url         : '/team/:teamID/gameHistory',
+		url         : '/gameHistory',
 		templateUrl : '/templates/stats/team.gameHistory.html'
 		})
 		.state('stats.team.teamPerf', {
-		url         : '/team/:teamID/teamPerf',
+		url         : '/teamPerf',
 		templateUrl : '/templates/stats/team.perf.html'
 		})
 	.state('stats.game', {
@@ -102,11 +110,11 @@ angular.module('Ketch', [
 		templateUrl : '/templates/stats/game.html'
 	})
 		.state('stats.game.perf', {
-			url         : '/game/:gameID/perf',
+			url         : '/perf',
 			templateUrl : '/templates/stats/game.perf.html'
 		})
 		.state('stats.game.scoreSummary', {
-			url         : '/game/:gameID/scoreSummary',
+			url         : '/scoreSummary',
 			templateUrl : '/templates/stats/game.scoreSummary.html'
 		})
 	.state('stats.player', {
@@ -114,11 +122,11 @@ angular.module('Ketch', [
 		templateUrl : '/templates/stats/player.html'
 	})
 		.state('stats.player.games', {
-			url         : '/player/:playerID/games',
+			url         : '/games',
 			templateUrl : '/templates/stats/player.games.html'
 		})
 		.state('stats.player.points', {
-			url         : '/player/:playerID/points',
+			url         : '/points',
 			templateUrl : '/templates/stats/player.points.html'
 		})
 

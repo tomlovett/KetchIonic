@@ -3,7 +3,7 @@
 
 	<div class="row" style="text-align: center" ng-click="gm.scoreboard()">
     <div class="col col-40">
-      <h1 class="scoreboard game">{{gm.models.game.score[0]}}</h1>
+      <h1 class="scoreboard game">{{gm.models.game.score[0] || 0}}</h1>
       <h3 class="game">{{gm.models.gameTeam.name}}</h3>
     </div>
     <div class="col">
@@ -11,13 +11,13 @@
       <!-- <h3>vs.</h3> -->
     </div>
     <div class="col col-40">
-      <h1 class="scoreboard game">{{gm.models.game.score[1]}}</h1>
-      <h3 class="game">{{gm.game.teams[1].name || 'THEM' }}</h3>
+      <h1 class="scoreboard game">{{gm.models.game.score[1] || 0}}</h1>
+      <h3 class="game">{{gm.game.teams[1].name || gm.opponent || 'THEM' }}</h3>
     </div>
   </div>
 
 	<ui-view></ui-view>
-<!-- subs/inPlay -->
+<!-- newGame and subs/inPlay -->
 
 	</ion-content>
 </ion-view>

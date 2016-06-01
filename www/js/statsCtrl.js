@@ -111,6 +111,7 @@ angular.module('Ketch')
 	}
 
 	var initController = function() {
+		console.log('stats.params: ', stats.params)
 		if (stats.params.gameID) 	stats.gameCard(stats.params.gameID)
 		if (stats.params.teamID) 	stats.teamCard(stats.params.teamID)
 		if (stats.params.playerID) 	stats.playerCard(stats.params.playerID)

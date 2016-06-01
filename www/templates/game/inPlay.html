@@ -23,22 +23,22 @@
 	<div class="row">
 		<div class="col col-50">
 			<div style="width: 70%">
-			<p class="my-button red" ng-click="gm.recordStat('throwaway')">Throwaway</p>
-			<p class="my-button red" ng-click="gm.recordStat('drop')">Drop</p>
-			<p class="my-button green" ng-click="gm.recordStat('D')">D</p>
-			<p class="my-button yellow" ng-click="gm.recordStat('goldStar')">Gold Star!!</p>
+			<p class="my-button red" ng-click="gm.statType('throwaway')">Throwaway</p>
+			<p class="my-button red" ng-click="gm.statType('drop')">Drop</p>
+			<p class="my-button green" ng-click="gm.statType('D')">D</p>
+			<p class="my-button yellow" ng-click="gm.statType('goldStar')">Gold Star!!</p>
 			<!-- <i class="ion ion-star"></i>  -->
 			</div>
 		</div>
 
 	    <div class="col col-25 col-offset-20">
 			<p ng-repeat="player in gm.field | filter: {gender: 'f'} | orderBy: 'handle'"
-			ng-click="gm.recordStat(player)"
+			ng-click="gm.statPlayer(player)"
 			class="player {{gm.models.gameTeam.primary}}">
 			{{player.handle}}
 			</p>
 			<p ng-repeat="player in gm.field | filter: {gender: 'm'} | orderBy: 'handle'"
-			ng-click="gm.recordStat(player)"
+			ng-click="gm.statPlayer(player)"
 			class="player {{gm.models.gameTeam.secondary}}">
 			{{player.handle}}
 			</p>
