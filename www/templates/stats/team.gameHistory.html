@@ -1,13 +1,22 @@
 <div>
 
-<!-- Apr 23  15-13  vs. SPAM -->
-
-<!-- better styling, obvi -->
+<!-- 	<div ng-repeat="game in stats.card.games" ng-click="stats.gameCard(game._id)" class="row">
+		<p class="col">
+			vs. {{ (game.teams[1].name || game.misc.opponent || 'THEM') }}
+		</p>
+		<p class="col-20">
+			{{ game.score[0] + ' - ' + game.score[1] }}
+		</p>
+	</div> -->
 
 	<ul class="list">
-		<li ng-repeat="game in stats.card.games" ng-click="stats.gameCard(game._id)" class="item item-scroll">
- 		{{game.score[0] + '-' + game.score[1] +  ' ' +
-		stats.models.teams[game.teams[0]]['name'] + ' vs. ' + (game.teams[1].name || 'THEM') }}
+		<li ng-repeat="game in stats.card.games" ng-click="stats.gameCard(game._id)" class="item list-item row">
+			<span class="col">
+			vs. {{ (game.teams[1].name || game.misc.opponent || 'THEM') }}
+			</span>
+			<span class="col-20">
+			{{ game.score[0] + ' - ' + game.score[1] }}
+			</span>
 		</li>
 	</ul>
 

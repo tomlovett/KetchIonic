@@ -1,12 +1,17 @@
-<div class="{{stats.card.primary}}">
+<div>
 
-	<h3>{{stats.card.name + '     ' + stats.card.record[0] + ' - ' + stats.card.record[1]}}
+	<div class="{{stats.card.primary}}">
+		<h3>
+			{{stats.card.name + '     ' + stats.card.record[0] + ' - ' + stats.card.record[1]}}
+		</h3>
 
-	<!-- gameHistory, playerPerformance -->
-
-	<button ui-sref="stats.team.gameHistory">Game history!</button>
-	<button ui-sref="stats.team.teamPerf">Player Performance!</button>
-
+		<!-- gameHistory, playerPerformance -->
+		<!-- convert to row/col format -->
+		<div class="{{stats.card.primary}}">
+			<button ui-sref="stats.team.gameHistory">Game history!</button>
+			<button ui-sref="stats.team.teamPerf">Player Performance!</button>
+		</div>
+	</div>
 
 	<ui-view></ui-view>
 

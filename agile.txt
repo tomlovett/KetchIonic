@@ -1,27 +1,27 @@
+Stats formatting
+	style cards
+		player has none
+		making team & game pretty
+	links to other cards; game->team misfiring, investigate
+	format details into rows
+		left-based text and right-aligned; plus conditional formatting score
+		team -> gameHistory:     vs. SPAM         14-11
+		team/game -> playerPerf: Justin Jones      7  +3
+
+---
+
 Abstract front-end routing
 	verify how to abstract routing
 	abstract game routes
 	abstract team routes
 	abstract stats routes
 
-Server-side stats issue
-	immediately goes to stats, perf not run yet
-
-Scaffolding future alias/opponent functionality
-	confirm that misc is storing
-
-Stats formatting
-	style cards
-	links to other cards
-	format details into rows
-		gameHistory ->  vs. SPAM         14-11
-		playerPerf  -> Justin Jones      7  +3
-
 Navigating between modules
 
 Re-Reading Mean Machine & Ionic production guides
 
-DEEP QUEUE-
+---
+
 YourTeams -> AllPlayers into All Teammates
 
 parameterize game routes
