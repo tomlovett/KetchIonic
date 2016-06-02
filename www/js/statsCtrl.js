@@ -52,15 +52,16 @@ angular.module('Ketch')
 							models.player(player)
 						})
 					})
-				if (stats.card.teams[1]) {
-					server.team(stats.card.teams[1])
-						.success(function(res) {
-							stats.card.teams[1] = res.team
-							res.team.roster.forEach(function(player) {
-								models.player(player)
-							})
-						})
-				}
+			// future functionality
+				// if (stats.card.teams[1]) {
+				// 	server.team(stats.card.teams[1])
+				// 		.success(function(res) {
+				// 			stats.card.teams[1] = res.team
+				// 			res.team.roster.forEach(function(player) {
+				// 				models.player(player)
+				// 			})
+				// 		})
+				// }
 			})
 	}
 

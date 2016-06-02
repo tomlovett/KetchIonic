@@ -1,14 +1,28 @@
-Change Init Game
-	mid-screen: enter opponent name, start game
-	functions to re-work it
-
 Abstract front-end routing
 	verify how to abstract routing
 	abstract game routes
 	abstract team routes
 	abstract stats routes
 
+Server-side stats issue
+	immediately goes to stats, perf not run yet
+
+Scaffolding future alias/opponent functionality
+	confirm that misc is storing
+
+Stats formatting
+	style cards
+	links to other cards
+	format details into rows
+		gameHistory ->  vs. SPAM         14-11
+		playerPerf  -> Justin Jones      7  +3
+
+Navigating between modules
+
+Re-Reading Mean Machine & Ionic production guides
 
 DEEP QUEUE-
+YourTeams -> AllPlayers into All Teammates
+
 parameterize game routes
 parameterize team routes

@@ -16,13 +16,11 @@ angular.module('Ketch')
 	gm.bench = []
 
 	gm.startGame = function() {
-		if (gm.alias) 			{ 'load alias' }
+		if      (gm.alias) 		{ 'load alias' }
 		else if (gm.opponent) 	{'pass to models'}
 		$state.go('game.subs')
 		gm.bench = models.roster
-		models.initGame(gm.alias, gm.opponent) // including, alias, opponent
-		gm.alias    = null
-		gm.opponent = null
+		models.initGame(gm.alias, gm.opponent) // including alias, opponent
 	}
 
 // Game Flow
@@ -41,9 +39,13 @@ angular.module('Ketch')
 	}
 
 	gm.closeGame = function() {
+		gm.alias    = null
+		gm.opponent = null
+		gm.field    = []
+		gm.bench    = []
 		$state.transitionTo('stats.game', {gameID: models.game._id}, 
 			{relative: 'stats', location: 'replace'})
-		// doesn't change URL
+		// doesn't immediately change URL but still functional
 		models.closeGame()
 	}
 
@@ -71,14 +73,14 @@ angular.module('Ketch')
 
 // Recording statistics
 	gm.statPlayer = function(clicked) {
-		if (stat.player)	stat.player = null
-		else				stat.player = clicked._id
+		if (clicked._id == stat.player)	stat.player = null
+		else							stat.player = clicked._id
 		checkStat()
 	}
 
 	gm.statType = function(clicked) {
-		if (stat.type)		stat.type = null
-		else				stat.type = clicked
+		if (clicked == stat.type)		stat.type = null
+		else							stat.type = clicked
 		checkStat()
 	}
 
