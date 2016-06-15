@@ -1,12 +1,8 @@
 Stats formatting
 	style cards
-		player has none
-		making team & game pretty
-	links to other cards; game->team misfiring, investigate
-	format details into rows
-		left-based text and right-aligned; plus conditional formatting score
-		team -> gameHistory:     vs. SPAM         14-11
-		team/game -> playerPerf: Justin Jones      7  +3
+		get rid of all h3's
+
+What's left? Running it on my phone? Production?
 
 ---
 

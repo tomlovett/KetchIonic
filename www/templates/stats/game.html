@@ -1,17 +1,21 @@
 <div>
 	<!-- upper block: Us vs. Them, score, [date] -->
-	<h3>
+
+	<!-- don't like this styling -->
+	<div>
 	<span ng-click="stats.teamCard(stats.card.teams[0]._id)">{{
 	stats.card.teams[0]['name'] }}</span>
 	vs.
 	<span ng-click="stats.teamCard(stats.card.teams[1]._id)">{{ (stats.card.teams[1].name || stats.card.misc.opponent || 'THEM')}}
 	</span>
 	{{stats.card.score[0] + ' - ' + stats.card.score[1]}}
-	</h3>
+	</div>
 
 	<!-- scoreSummary, playerPeformance -->
-	<button ui-sref="stats.game.scoreSummary">Score Summary!</button>
-	<button ui-sref="stats.game.perf">Player Performance!</button>
+	<div class="row">
+		<div class="col centered" ui-sref="stats.game.scoreSummary">Score Summary</div>
+		<div class="col centered" ui-sref="stats.game.perf">Player Performance</div>
+	</div>
 
 	<ui-view></ui-view>
 
