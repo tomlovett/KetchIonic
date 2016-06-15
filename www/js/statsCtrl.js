@@ -91,6 +91,8 @@ angular.module('Ketch')
 	}
 
 	stats.teamCard = function(id) {
+		if (id === undefined)	return 
+		// a catch for users clicking on an undefined team
 		$state.go('stats.team', {teamID: id})
 		setHeader()
 		models.team(id)

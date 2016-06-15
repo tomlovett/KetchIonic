@@ -1,10 +1,20 @@
 <div>
 
-<!-- stats section? -->
-
 	<ul class="list">
-		<li ng-repeat="(id, perf) in stats.card.perf" ng-click="stats.playerCard(id)" class="item item-scroll">
- 		{{stats.models.player(id)['handle']}}  Points: {{perf.points}} +/-: {{perf['+/-']}}
+		<li class="item row">
+		<span class="col"></span>
+
+		<span class="col-20 centered">Points</span>
+		<span class="col-20 centered">+/-</span>
+		</li>
+
+		<li ng-repeat="(id, perf) in stats.card.perf" ng-click="stats.playerCard(id)" class="item row">
+		<span class="col">
+		{{stats.models.player(id)['handle']}}
+		</span>
+
+		<span class="col col-20 centered">{{perf.points}}</span>
+		<span class="col col-20 centered">{{perf['+/-']}}</span>
 		</li>
 	</ul>
 

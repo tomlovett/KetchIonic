@@ -3,7 +3,7 @@ angular.module('Ketch').factory('models', function(server) {
 	var m = {}
 	
 	m.teams   = {}
-	m.players = {}
+	m.players = {}  // re-naming to "cache"
 	m.roster  = []
 
 	m.game     = null

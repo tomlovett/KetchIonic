@@ -1,11 +1,17 @@
 <div>
 
-	<h3>{{ stats.card.first + ' ' + stats.card.last }}</h3>
-	<!-- formatting player name -> handle/not -->
+	<div class="row">
+		<h3 class="col">{{ stats.card.first + ' ' + stats.card.last }}</h3>
+		<!-- formatting player name -> handle/not -->
+		<div class="col col-33">
+		{{stats.card.perf.games}}/
+		{{stats.card.perf.points}}
+		/{{stats.card.perf['+/-']}}</div>
+	</div>
 
 	<h5><span ng-repeat="team in stats.card.teams" ng-click="stats.teamCard(team._id)" class="player {{team.primary}}">{{team.name + ' '}}</span></h5>
 
-	<h5>Games: {{stats.card.perf.games}} Points: {{stats.card.perf.points}} +/-: {{stats.card.perf['+/-']}}</h5>
+	<h5 class="col col-33">Games: {{stats.card.perf.games}} Points: {{stats.card.perf.points}} +/-: {{stats.card.perf['+/-']}}</h5>
 
 	<button ui-sref="stats.player.games">Game History!</button>
 	<button ui-sref="stats.player.points">Point History!</button>
