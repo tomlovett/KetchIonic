@@ -19,8 +19,11 @@ The Ionic framework enables web applications to run natively in iOS and Android.
 
 Tutorial
   Log in and create a new account for yourself.
+  
   Create a team of your friends. Most Ultimate mixed games are played with a 4/3 ratio; four men and three women on the field for every point. To get the full effect of substitutions try to create between six and eight guys and five or six women.
+  
   Start a game! Record who's on the field by tapping players from the bench to field and vice versa. Record at least six points; give yourself a few, give your opponents a few. Be sure to sub players on and off the field between points. Click on the scoreboard to view a point-by-point breakdown of the game so far. When you're ready, close out the game. 
+  
   The app will then take you to statistics mode. Here you'll see data from the game. You can navigate to statistics for players, teams and games by clicking on their names. 
 
 Notes:
