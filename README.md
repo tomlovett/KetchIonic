@@ -14,7 +14,7 @@ Running the App
 
 The Ionic framework enables web applications to run natively in iOS and Android. The app can be simulated in web browser but it will require some initial legwork. 
 
-1. Pull both KetchUltimate and KetchServer. KetchServer is the server, KetchUltimate encompasses the client side.
+1. Pull both KetchUltimate and KetchServer (https://github.com/tomlovett/KetchServer). KetchServer is the server, KetchUltimate encompasses the client side.
 2. Open three terminal windows. Use the first to spin up MongoDB.
 3. Navigate the second window to the KetchServer folder. Install the dependencies with "npm install" Then spin up the server with "nodemon"
 4. Navigate the third window to KetchUltimate. Install the dependencies. Call "ionic serve" to spin up the front end. Ionic will open a new browser window and navigate it to the app. The app is designed for mobile phones so switch to Device Mode (assuming you're using Google Chrome). If you're not using Chrome just shrink the window to the size of a mobile phone.
